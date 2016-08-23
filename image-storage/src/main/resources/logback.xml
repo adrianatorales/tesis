@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+<!--    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>D:\daas\proyectos\trabajo\java\TigoMoney\wildfly\EntermovilWS\logs\MyLog.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %-5level %logger{26} - %msg%n</Pattern>
+        </layout>   
+    </appender>-->
+    <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%date [%thread] %-5level %logger{26} - %msg%n</Pattern>
+        </layout>
+    </appender>
+    <appender name="RollingFILE" class="ch.qos.logback.core.rolling.RollingFileAppender">      
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+            <FileNamePattern>C:\Users\Thelma\Documents\Proyectos\imagestorage\logs\ImageStorage.%d{yyyy-MM-dd}.log</FileNamePattern>       
+            <MaxHistory>30</MaxHistory>     
+        </rollingPolicy>      
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] %m%n</pattern>
+        </encoder> 
+    </appender>
+    <logger name="py.com.entermovil" level="DEBUG"/>
+    <root level="DEBUG">
+        <appender-ref ref="APP" />
+        <appender-ref ref="FILE" />
+        <appender-ref ref="RollingFILE" />
+    </root>
+</configuration>
