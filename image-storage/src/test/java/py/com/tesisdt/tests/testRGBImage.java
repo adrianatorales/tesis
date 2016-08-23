@@ -24,14 +24,11 @@ public class testRGBImage {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-        String basePath = "C:\\images\\test\\noisy\\lena_ruido_gaussiano_1.png";
-        //String basePath = "C:\\images\\lena\\cube.png";
+        String basePath = "/home/daasalbion/Imágenes/foto_de_perfil.png";
         int sLength = basePath.length();
         String extension = basePath.substring(sLength-3, sLength);
-        // TODO code application logic here
         ImagePlus imgOriginal = new ImagePlus( basePath );
         ColorProcessor colImgOriginal = (ColorProcessor) imgOriginal.getProcessor();
-
         RgbImage image = new RgbImage(colImgOriginal, extension);
         image.setNoiseProbability(null);
         image.setDescription(1.0);
