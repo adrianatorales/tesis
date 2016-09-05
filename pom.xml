@@ -17,7 +17,7 @@
             <version>1.51d</version>
             <type>jar</type>
         </dependency>
-        <!--log util-->
+        <!--log py.com.daas.util-->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
@@ -55,6 +55,7 @@
     <modules>
         <module>image-storage</module>
         <module>tesis-rgb</module>
+        <module>test-manager</module>
     </modules>
 
 </project>

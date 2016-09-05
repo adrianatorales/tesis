@@ -5,7 +5,7 @@
  */
 package py.com.tesisrgb.impl;
 
-import py.com.tesisdt.imagestorage.models.RgbImage;
+import py.com.daas.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.Entropy;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstractWW;
 import py.com.tesisrgb.generics.Weight;

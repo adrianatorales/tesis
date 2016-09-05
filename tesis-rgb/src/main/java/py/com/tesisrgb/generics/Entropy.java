@@ -1,6 +1,6 @@
 package py.com.tesisrgb.generics;
 
-import py.com.tesisdt.imagestorage.models.Window;
+import py.com.daas.imagestorage.models.Window;
 
 /**
  * Created by Thelma on 05/06/2016.
