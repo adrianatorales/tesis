@@ -23,7 +23,8 @@ import java.util.List;
  */
 public class RgbImageJpaController implements Serializable {
     
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("py.com.tesisdt_ImageStorage_jar_1.0PU");
+    private EntityManagerFactory emf = Persistence
+            .createEntityManagerFactory("py.com.tesisdt_ImageStorage_jar_1.0PU");
     
     public EntityManager getEntityManager() {
         return emf.createEntityManager();

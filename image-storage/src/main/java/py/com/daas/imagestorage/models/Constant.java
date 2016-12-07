@@ -14,6 +14,14 @@ public class Constant {
     public static final int CHANNEL_GREEN = 2;
     public static final int CHANNEL_BLUE = 3;
     public static final int MAX_INTENSITY_VALUE = 255;
-    public static final String CATALOG = "daas";
+    /*
+        --Realizar esta consulta para saber el catalogo y schema
+        SELECT *
+        FROM information_schema.columns
+        WHERE table_schema = 'your_schema'
+        AND table_name   = 'your_table'
+        link: http://dba.stackexchange.com/questions/22362/how-do-i-list-all-columns-for-a-specified-table
+    */
+    public static final String CATALOG = "tesisdt";
     public static final String SCHEMA = "public";
 }

@@ -206,3 +206,5 @@ WITH (
 );
 ALTER TABLE resultados_alpha_modulus_lex
   OWNER TO postgres;
+
+insert INTO sequence values ('SEQ_GEN', 0);

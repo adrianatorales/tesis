@@ -30,12 +30,12 @@ public class testRGBImage {
         ImagePlus imgOriginal = new ImagePlus( basePath );
         ColorProcessor colImgOriginal = (ColorProcessor) imgOriginal.getProcessor();
         RgbImage image = new RgbImage(colImgOriginal, extension);
+        image.setNoiseName("without_noise");
         image.setNoiseProbability(null);
         image.setDescription(1.0);
         WindowMgr windowMgr = new WindowMgr(image, Arrays.asList(1,2,4,8));
         windowMgr.setWindowsList();
-        RgbImageJpaController rgbImageJpaController  = new RgbImageJpaController();
-        //rgbImageJpaController.create(image);
+        RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
+        rgbImageJpaController.create(image);
     }
-    
 }

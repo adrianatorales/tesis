@@ -1,8 +1,10 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Ejecutar mvn clean install para obtener las dependencias. Cualquier cosa que no funciona hablar con Thelma, jajaja bola
 
 ### What is this repository for? ###
+
+El repositorio aloja el proyecto padre y sus hijos utilizados para las pruebas de la tesis del mismo nombre
 
 tesis-arguello-balbuena
 	image-storage -> (guardar imagenes de prueba)

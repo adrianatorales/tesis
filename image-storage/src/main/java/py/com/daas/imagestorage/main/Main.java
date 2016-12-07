@@ -45,7 +45,7 @@ public class Main {
             image = new RgbImage(colImgOriginal, config.EXTENSION);
             image.setNoiseName("original");
             image.setNoiseProbability(null);
-            image.setDescription(Double.valueOf(i));
+            image.setDescription((double) i);
             rgbImageJpaController.create(image);
             t1 = System.currentTimeMillis();
 
