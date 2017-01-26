@@ -19,7 +19,7 @@ import static py.com.daas.testmanager.util.TestConstants.Filters.TesisRGB.ConVen
  */
 public class TestConfig {
 
-    public boolean GUARDAR_IMAGENES = false;
+    public boolean GUARDAR_IMAGENES = true;
 
     public int[] LISTA_VENTANAS = {1, 5, 7};
     
@@ -51,7 +51,7 @@ public class TestConfig {
     public int INDEX_IMAGENES_FROM = 1;
     public int INDEX_IMAGENES_TO = 100;
 
-    public String BASE_PATH = "/home/jvazquez/median_filters/images/imgs/";
+    public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/";
     public String PATH_ORIGINAL_IMAGE = BASE_PATH + "test";
     public String NOISY_PATH_SUFFIX = "/noisy";
     public String RESTORED_PATH_SUFFIX = "/restored";

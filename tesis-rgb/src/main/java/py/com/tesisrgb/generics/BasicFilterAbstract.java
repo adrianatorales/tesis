@@ -18,12 +18,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
+
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author Derlis Argüello
  */
 public abstract class BasicFilterAbstract {
+	
+	static final org.slf4j.Logger logger = LoggerFactory.getLogger(BasicFilterAbstract.class);
     //jpa components
     public RgbImageJpaController rgbImageJpaController;
     public RgbImage rgbImage;
@@ -87,8 +92,8 @@ public abstract class BasicFilterAbstract {
                     t = t + weight[channel] * rgbColor[channel];
                 }
 
-                pixelWeight = new PixelWeight(rgbColor, t);
-                orderPixelWeight.add(pixelWeight);
+                //pixelWeight = new PixelWeight(rgbColor, t);
+               // orderPixelWeight.add(pixelWeight);
                 t = 0.0;
             }
         }
@@ -105,9 +110,12 @@ public abstract class BasicFilterAbstract {
         //los valores reducidos
         reducedValueCounter += comparator.valorReducido;
         //obtenemos el filtro
+        
+        logger.debug("orderPixelWeight", orderPixelWeight.get(0).toString());
+        
         filterP = getFilter(orderPixelWeight);
 
-        //logger.debug("filterP={}", Arrays.toString(filterP));
+      
 
         return filterP;
     }
@@ -150,6 +158,7 @@ public abstract class BasicFilterAbstract {
 
     public abstract Weight getWeight();
 
+    /***********modificado***********************/
     public ColorProcessor run() throws Exception {
         int[] elementP;
         double[] realWeight;
@@ -157,13 +166,47 @@ public abstract class BasicFilterAbstract {
         long totalDecisiones = 0;
         setWindowsList();
         weight = getWeight();
-
+        
+        List<PixelWeight> orderPixelWeight = new ArrayList<>();
+        
         for (int y = 0; y < height; y++) {
             for (int x = 0; x < width; x++) {
                 pixel = new Pixel(x, y);
                 realWeight = getRealWeight(pixel);
-                elementP = order(realWeight, pixel);
-                restoredColProcessor.putPixel(x, y, elementP);
+                //elementP = order(realWeight, pixel);
+                /******************agregado**************************/
+                int cLength = channels.length;
+                int xi, yi;
+                double t = 0.0;
+                int[] rgbColor;
+               
+                PixelWeight pixelWeight;
+                int[] filterP;
+                Pixel p=pixel;
+                Pixel posicionXY=pixel;
+                double[] weight=realWeight;
+
+                for (Pixel sePixel : se) {
+                    xi = p.getX() + sePixel.getX();
+                    yi = p.getY() + sePixel.getY();
+                    //verificamos si esta en la ventana del elemento estructurante
+                    if (xi > -1 && xi < width && yi > -1 && yi < height) {
+                    	posicionXY=new Pixel(xi,yi);
+                        rgbColor = new int[cLength];
+                        for (int channel = 0; channel < cLength; channel++) {
+                            rgbColor[channel] = channels[channel].get(xi, yi);
+                            t = t + weight[channel] * rgbColor[channel];
+                        }
+
+                        pixelWeight = new PixelWeight(rgbColor, t, posicionXY); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
+                        orderPixelWeight.add(pixelWeight);
+                        t = 0.0;
+                    }
+                }
+                
+                
+                /********************agregado*******************************/
+                //restoredColProcessor.putPixel(x, y, elementP);
             }
         }
 

@@ -47,7 +47,8 @@ public class TestConfig {
     public int INDEX_IMAGENES_FROM = 83;
     public int INDEX_IMAGENES_TO = 83;
     
-    public String BASE_PATH = "F:/images/";
+    //public String BASE_PATH = "F:/images/";
+    public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/";
     public String PATH_ORIGINAL_IMAGE = BASE_PATH + "test";
     public String NOISY_PATH_SUFFIX = "/noisy";
     public String RESTORED_PATH_SUFFIX = "/restored";

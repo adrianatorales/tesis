@@ -33,9 +33,9 @@ public class TesisRGBEntropyTest {
         
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
-        RgbImage rgbImage = rgbImageJpaController.findRgbImage(34363);
+        RgbImage rgbImage = rgbImageJpaController.findRgbImage(1355);
         
-        tesisRGB = new TesisRGBEntropy(3, "Median", rgbImage, seEight);
+        tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         
         tesisRGB.run();
         /*
