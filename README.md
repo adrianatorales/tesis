@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # README #
 
 Ejecutar mvn clean install para obtener las dependencias. Cualquier cosa que no funciona hablar con Thelma, jajaja bola
@@ -31,3 +32,6 @@ tesis-arguello-balbuena
 
 * Repo owner or admin
 * Other community or team contact
+=======
+# tesis
+>>>>>>> bc62259e5de3937e74b1d5fd3026063704983b65
