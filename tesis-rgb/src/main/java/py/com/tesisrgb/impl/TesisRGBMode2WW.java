@@ -5,7 +5,7 @@
  */
 package py.com.tesisrgb.impl;
 
-import py.com.daas.imagestorage.models.RgbImage;
+import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.Mode2;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstractWW;
 import py.com.tesisrgb.generics.Weight;

@@ -5,8 +5,8 @@
  */
 package py.com.tesisrgb.generics;
 
-import py.com.daas.imagestorage.models.RgbImage;
-import py.com.daas.imagestorage.models.Window;
+import py.com.adrianamabel.imagestorage.models.RgbImage;
+import py.com.adrianamabel.imagestorage.models.Window;
 import py.com.tesisrgb.models.Pixel;
 
 import java.util.ArrayList;

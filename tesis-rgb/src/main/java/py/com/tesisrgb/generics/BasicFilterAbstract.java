@@ -9,11 +9,12 @@ import ij.ImagePlus;
 import ij.io.FileSaver;
 import ij.process.ByteProcessor;
 import ij.process.ColorProcessor;
-import py.com.daas.imagestorage.models.RgbImage;
-import py.com.daas.imagestorage.utils.RgbImageJpaController;
+import py.com.adrianamabel.imagestorage.models.RgbImage;
+import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
 import py.com.tesisrgb.models.Pixel;
 import py.com.tesisrgb.models.PixelWeight;
 import py.com.tesisrgb.models.TesisComparator;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,10 +23,7 @@ import java.util.logging.Logger;
 
 import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author Derlis Argüello
- */
+
 public abstract class BasicFilterAbstract {
 	
 	static final org.slf4j.Logger logger = LoggerFactory.getLogger(BasicFilterAbstract.class);
@@ -166,43 +164,48 @@ public abstract class BasicFilterAbstract {
         long totalDecisiones = 0;
         setWindowsList();
         weight = getWeight();
-        
+        int xi, yi;
         List<PixelWeight> orderPixelWeight = new ArrayList<>();
         
-        for (int y = 0; y < height; y++) {
-            for (int x = 0; x < width; x++) {
+        for (int x = 0; x<  width; x++) {
+            for (int y = 0; y < height; y++) {
                 pixel = new Pixel(x, y);
+                System.out.println(pixel.getX()+" "+ pixel.getY());
                 realWeight = getRealWeight(pixel);
+                
+                //System.out.println("LLEGO");
                 //elementP = order(realWeight, pixel);
                 /******************agregado**************************/
                 int cLength = channels.length;
-                int xi, yi;
+                
                 double t = 0.0;
                 int[] rgbColor;
                
                 PixelWeight pixelWeight;
-                int[] filterP;
-                Pixel p=pixel;
-                Pixel posicionXY=pixel;
+                //int[] filterP;
+                //Pixel p=pixel;
+               // Pixel posicionXY=pixel;
                 double[] weight=realWeight;
 
-                for (Pixel sePixel : se) {
-                    xi = p.getX() + sePixel.getX();
-                    yi = p.getY() + sePixel.getY();
+                //for (Pixel sePixel : se) {
+                  //  xi = p.getX() + sePixel.getX();
+                    //yi = p.getY() + sePixel.getY();
                     //verificamos si esta en la ventana del elemento estructurante
-                    if (xi > -1 && xi < width && yi > -1 && yi < height) {
-                    	posicionXY=new Pixel(xi,yi);
+                    //if (xi > -1 && xi < width && yi > -1 && yi < height) {
+                    	//posicionXY=new Pixel(xi,yi);
                         rgbColor = new int[cLength];
+                  //      System.out.println("LLEGO1");
                         for (int channel = 0; channel < cLength; channel++) {
-                            rgbColor[channel] = channels[channel].get(xi, yi);
+                            rgbColor[channel] = channels[channel].get(x, y);
+                    //        System.out.println("LLEGO2");
                             t = t + weight[channel] * rgbColor[channel];
                         }
-
-                        pixelWeight = new PixelWeight(rgbColor, t, posicionXY); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
+                      //  System.out.println("LLEGO3");
+                        pixelWeight = new PixelWeight(rgbColor, t, pixel); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
                         orderPixelWeight.add(pixelWeight);
                         t = 0.0;
-                    }
-                }
+                    //}
+                //}
                 
                 
                 /********************agregado*******************************/
@@ -210,9 +213,9 @@ public abstract class BasicFilterAbstract {
             }
         }
 
-        show();
+        xi=0;
 
-        for (int channel = 0; channel < channels.length; channel++) {
+        /*for (int channel = 0; channel < channels.length; channel++) {
             totalDecisiones = decisionByCompCounter[channel];
         }
 
@@ -222,7 +225,7 @@ public abstract class BasicFilterAbstract {
             decisionByComp[i] = (double)decisionByCompCounter[i]/(double)totalDecisiones;
         }
 
-        reducedValue = (double)reducedValueCounter/(double)totalDecisiones;
+        reducedValue = (double)reducedValueCounter/(double)totalDecisiones;*/
         return restoredColProcessor;
     }
     

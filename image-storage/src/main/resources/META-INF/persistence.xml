@@ -2,16 +2,17 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="py.com.tesisdt_ImageStorage_jar_1.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <class>py.com.daas.imagestorage.models.RgbImageDataChannelGreen</class>
-    <class>py.com.daas.imagestorage.models.RgbImage</class>
-    <class>py.com.daas.imagestorage.models.RgbImageDataChannelRed</class>
-    <class>py.com.daas.imagestorage.models.RgbImageDataChannelBlue</class>
-    <class>py.com.daas.imagestorage.models.RgbWindow</class>
+    <class>py.com.adrianamabel.imagestorage.models.RgbImageDataChannelGreen</class>
+    <class>py.com.adrianamabel.imagestorage.models.RgbImage</class>
+    <class>py.com.adrianamabel.imagestorage.models.RgbImageDataChannelRed</class>
+    <class>py.com.adrianamabel.imagestorage.models.RgbImageDataChannelBlue</class>
+    <class>py.com.adrianamabel.imagestorage.models.RgbWindow</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost/tesisdt"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="12345"/>
+      <property name="javax.persistence.jdbc.password" value="postgres"/>
+      
     </properties>
   </persistence-unit>
 </persistence>
