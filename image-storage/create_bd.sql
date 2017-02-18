@@ -1,4 +1,4 @@
--- Database: tesisdt
+-- Database: tesisdt hacer en la base de datos
 
 -- DROP DATABASE tesisdt;
 
