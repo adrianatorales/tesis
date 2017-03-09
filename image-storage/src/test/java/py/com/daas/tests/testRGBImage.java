@@ -7,9 +7,9 @@ package py.com.daas.tests;
 
 import ij.ImagePlus;
 import ij.process.ColorProcessor;
-import py.com.daas.imagestorage.models.RgbImage;
-import py.com.daas.imagestorage.utils.RgbImageJpaController;
-import py.com.daas.imagestorage.utils.WindowMgr;
+import py.com.adrianamabel.imagestorage.models.RgbImage;
+import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
+import py.com.adrianamabel.imagestorage.utils.WindowMgr;
 
 import java.util.Arrays;
 
