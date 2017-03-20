@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author daasalbion
+ * @author 
  */
 public class PixelWeight {
     private int[] pixel;
@@ -16,6 +16,8 @@ public class PixelWeight {
     private int posicionX;
     private int posicionY;
 
+    public PixelWeight(){}
+    
     public PixelWeight(int[] pixel, double weight, Pixel posicion) {
         this.pixel = pixel;
         this.weight = weight;
