@@ -207,14 +207,16 @@ public abstract class BasicFilterAbstract {
                     //}
                 //}
                 
-                //ENVIAMOS TODO A LA CLASE QUE REALIZA LA MEDIANAADAPTATIVA
-                TesisRGBMedianaAdaptativa medianaAdaptativa= new TesisRGBMedianaAdaptativa();
-                medianaAdaptativa.medianaAdaptativa(orderPixelWeight);
+                
                 
                 /********************agregado*******************************/
                 //restoredColProcessor.putPixel(x, y, elementP);
             }
         }
+        
+      //ENVIAMOS TODO A LA CLASE QUE REALIZA LA MEDIANAADAPTATIVA
+        TesisRGBMedianaAdaptativa medianaAdaptativa= new TesisRGBMedianaAdaptativa();
+        medianaAdaptativa.medianaAdaptativa(orderPixelWeight, this.restoredColProcessor);
 
         xi=0;
 

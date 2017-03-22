@@ -38,6 +38,8 @@ public class TesisRGBEntropyTest {
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         
         tesisRGB.run();
+        
+        System.out.println("FIN DEL PROCESO");
         /*
         tesisRGB = new TesisRGBEntropy(2, "Max", rgbImage, seEight);
         

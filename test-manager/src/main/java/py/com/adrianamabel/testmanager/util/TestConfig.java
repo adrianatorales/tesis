@@ -48,10 +48,10 @@ public class TestConfig {
         {2, 1, 0}
     };
     
-    public int INDEX_IMAGENES_FROM = 1;
-    public int INDEX_IMAGENES_TO = 100;
+    public int INDEX_IMAGENES_FROM = 83;
+    public int INDEX_IMAGENES_TO = 83;
 
-    public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/";
+    public String BASE_PATH="/home/adriana/Documentos/recursos/test";
     public String PATH_ORIGINAL_IMAGE = BASE_PATH + "test";
     public String NOISY_PATH_SUFFIX = "/noisy";
     public String RESTORED_PATH_SUFFIX = "/restored";

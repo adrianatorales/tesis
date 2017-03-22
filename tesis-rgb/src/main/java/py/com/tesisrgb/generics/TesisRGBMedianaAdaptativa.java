@@ -1,5 +1,8 @@
 package py.com.tesisrgb.generics;
 
+import ij.process.ColorProcessor;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import py.com.tesisrgb.models.PixelWeight;
@@ -9,28 +12,33 @@ public class TesisRGBMedianaAdaptativa {
 	
 	public int p,q,m,n,c,r,i,j,smax;
 	public int fila, columna, limiteFila, limiteColumna;
-	public int [][]x;
+	public PixelWeight x;
 	public PixelWeight zmed;
 	public PixelWeight zmin;
 	public PixelWeight zmax;
 	public int centrox;
 	public int centroy;
-	public int zxy;
-	public int A1;
-	public int A2;
-	public int B1;
-	public int B2;
-	public int salida;
+	public PixelWeight zxy;
+	public Double A1;
+	public Double A2;
+	public Double B1;
+	public Double B2;
+	public PixelWeight salida;
+	private List<PixelWeight> subListaOrderPixelWeight;
+	private List<PixelWeight> ordenadoOrderPixelWeight;
+	private List<PixelWeight> descartarGuardado;
+	public ColorProcessor restoredColProcessor;
 
 	
 	
 	public TesisRGBMedianaAdaptativa(){}
 	
-	public int[][] medianaAdaptativa(List<PixelWeight> orderPixelWeight)
+	public  List<PixelWeight> medianaAdaptativa(List<PixelWeight> orderPixelWeight, ColorProcessor restoredColProcessor)
 	{
 			
-		int mayorx=0;
-		int mayory=0;
+		int mayorx=0; //COLUMNA MAYOR
+		int mayory=0; //FILA MAYOR
+		int index=0;
 		
 		for (PixelWeight recorrerLista : orderPixelWeight){
 			if (recorrerLista.getPosicionX()>mayorx)
@@ -40,8 +48,8 @@ public class TesisRGBMedianaAdaptativa {
 				mayory=recorrerLista.getPosicionY();
 			
 		}
-		p=mayorx+1; //obtenemos numero de fila
-		q=mayory+1; //obtenemos el numero de columna
+		p=mayory+1; //obtenemos numero de fila
+		q=mayorx+1; //obtenemos el numero de columna
 		
 		/***ventana que va a crecer hasta 7***/
 		m=3;
@@ -64,49 +72,67 @@ public class TesisRGBMedianaAdaptativa {
 		           // x=f(i:(i+m-1),j:(j+n-1)); //ABAJO TRADUCCION SUBMATRIZ
 		    	   
 		    	    x=null;
-		    	    x=new int[m][n];
+		    	    //x=new int[m][n];
 		    	    limiteFila=i+m-1;
 		    	    limiteColumna=j+n-1;
 		    	    
-		    	    int xfil=0, xcol=0;
-		    	    
-		    	    
-		    	    //Obtenemos una SubLista
-		    	    List<PixelWeight> SubListaOrderPixelWeight=null;
-		            for (fila=i; i< limiteFila;i++){
-		            	for (columna=j; j< limiteColumna;j++){	
-		            		SubListaOrderPixelWeight.add(obtenerElementoLista(orderPixelWeight,fila,columna));
+		    	    subListaOrderPixelWeight = new ArrayList<PixelWeight>();
+		            for (i=0; i<= limiteFila;i++){
+		            	for (j=0; j<= limiteColumna;j++){	
+		            		subListaOrderPixelWeight.add(obtenerElementoLista(orderPixelWeight,i,j));
 		            	}
 		            }
 		            
 		           
 		            
-		            zmed =median(SubListaOrderPixelWeight,m,n); //obtener peso mediana
+		            zmed =median(subListaOrderPixelWeight,m,n); //obtener peso mediana
 		            
-		            zmin=min(x,m,n); //minimo valor
+		            zmin=min(subListaOrderPixelWeight,m,n); //minimo valor
 		           
-		            zmax=max(x,m,n); //maximo valor
+		            zmax=max(subListaOrderPixelWeight,m,n); //maximo valor
 		           
 		            centrox=(int) Math.ceil(m/2)+1;
 		            centroy=(int) Math.ceil(m/2)+1;
 		            
-		            zxy=x[centrox][centroy];
+		            centrox=centrox-1;
+		            centroy=centroy-1;
+		                		
+		            for (PixelWeight centro: subListaOrderPixelWeight){  
+				       if(centro.getPosicionX()==centroy && centro.getPosicionY()==centrox){
+				    	   zxy=centro;
+				    	   break;
+				       }
+				     
+		            }		
+		            		
+		            		
 		          
-		            A1=zmed-zmin;
+		            A1=zmed.getWeight()-zmin.getWeight();
 		           
-		            A2=zmed-zmax;
+		            A2=zmed.getWeight()-zmax.getWeight();
 		            
 		            
 		            if (A1>0){
 		                if(A2<0){
-		                    B1=zxy-zmin;
-		                    B2=zxy-zmax;
+		                    B1=zxy.getWeight()-zmin.getWeight();
+		                    B2=zxy.getWeight()-zmax.getWeight();
 		                   
 		                    if(B1>0 && B2<0){
 		                        centrox=(int)Math.ceil((i+(i+m-1))/2);
 		                        centroy=(int)Math.ceil((j+(j+n-1))/2);
 		                        salida=zxy;
-		                        matrizOrdenadaEscalar[centrox][centroy]=salida;
+		                        index=0;
+		                        for (PixelWeight centro: orderPixelWeight){ 
+		     				       if(centro.getPosicionX()==centrox && centro.getPosicionY()==centroy){
+		     				    	   centro=salida;
+		     				    	   //orderPixelWeight.set(index, centro);
+		     				    	   restoredColProcessor.putPixel(centrox, centroy, centro.getPixel());
+		     				    	   break;
+		     				       }
+		     				       index++;
+		     		            }
+		                        //matrizOrdenadaEscalar[centrox][centroy]=salida;
+		                        
 		                        if(j==c){
 		                            i=i+1;
 		                            j=1;
@@ -120,7 +146,17 @@ public class TesisRGBMedianaAdaptativa {
 		                        salida=zmed;
 		                        centrox=(int)Math.ceil((i+(i+m-1))/2);
 		                        centroy=(int)Math.ceil((j+(j+n-1))/2);
-		                        matrizOrdenadaEscalar[centrox][centroy]=salida;
+		                        //matrizOrdenadaEscalar[centrox][centroy]=salida;
+		                        index=0;
+		                        for (PixelWeight centro: orderPixelWeight){ 
+		     				       if(centro.getPosicionX()==centrox && centro.getPosicionY()==centroy){
+		     				    	   centro=salida;
+		     				    	   //orderPixelWeight.set(index, centro);
+		     				    	   restoredColProcessor.putPixel(centrox, centroy, centro.getPixel());
+		     				    	   break;
+		     				       }
+		     				       index++;
+		     		            }
 		                        if(j==c){
 		                            i=i+1;
 		                            j=1;
@@ -142,54 +178,60 @@ public class TesisRGBMedianaAdaptativa {
 		       }
 		}
 		    
-		return matrizOrdenadaEscalar ;
+		return orderPixelWeight ;
 
 	}
 		
-    
+		/****Funcion que retorna la mediana de la lista*******/
 		public PixelWeight median( List<PixelWeight> SubListaOrderPixelWeight , int m, int n) {
 	       
 	       List<PixelWeight>subListaOrdenada= ordenarLista (SubListaOrderPixelWeight);
 	       int element = (int) Math.ceil(subListaOrdenada.size() / 2);
 	       
-	       return subListaOrdenada.get(element-1);
+	       return subListaOrdenada.get(element);
 	       
 	    }
 		
-		
-		
+		/****Funcion obtiene el elemento de la fila y la columna
+		 * que se le pasa*******/
 		public PixelWeight obtenerElementoLista(List<PixelWeight> orderPixelWeight, int fila, int columna){
 			
 			
 			for (PixelWeight recorrerLista : orderPixelWeight){
-				if (recorrerLista.getPosicionX()==fila && recorrerLista.getPosicionY()==columna){
+				if (recorrerLista.getPosicionX()==columna && recorrerLista.getPosicionY()==fila){
 					return recorrerLista;
 				}	
 			}
 			return null;
 		}
 
+		/****Funcion que ordena la lista de menor a mayor*******/
 		public List<PixelWeight> ordenarLista (List<PixelWeight> orderPixelWeight){
-			List<PixelWeight> OrdenadoOrderPixelWeight=null;
+			ordenadoOrderPixelWeight = null;
+			
+			ordenadoOrderPixelWeight = new ArrayList<PixelWeight>();
 			
 			PixelWeight menorPeso;
 			menorPeso=orderPixelWeight.get(0);
 			
 			
-			while (OrdenadoOrderPixelWeight.size()!=orderPixelWeight.size()){
-				menorPeso=obtenerMenorPeso(OrdenadoOrderPixelWeight,orderPixelWeight);
-				OrdenadoOrderPixelWeight.add(menorPeso);
+			while (ordenadoOrderPixelWeight.size()!=orderPixelWeight.size()){
+				menorPeso=obtenerMenorPeso(ordenadoOrderPixelWeight,orderPixelWeight);
+				ordenadoOrderPixelWeight.add(menorPeso);
 			}
-			return OrdenadoOrderPixelWeight;
+			return ordenadoOrderPixelWeight;
 		}
 		
 		/***Obtiene el menor continuo. Recibe
-		 * la ordenado que ya contiene y
+		 * la lista ordenada que ya contiene y
 		 * la lista completa desordenada***/
 		
 		public PixelWeight obtenerMenorPeso (List<PixelWeight> OrdenadoOrderPixelWeight, List<PixelWeight> orderPixelWeight){
 			
-			List<PixelWeight> descartarGuardado = null;
+			descartarGuardado = null;
+			
+			descartarGuardado = new ArrayList<PixelWeight>();
+			
 			PixelWeight menor;
 			
 			if(OrdenadoOrderPixelWeight!=null && OrdenadoOrderPixelWeight.size()>0){
@@ -225,37 +267,21 @@ public class TesisRGBMedianaAdaptativa {
 			}
 			return false;
 		}
-		//
 		
-		public int min(int [][] subMatriz, int m, int n) {
-	        int element = 0;
-	        int [] vector=new int [m*n];
-		       
-		       int k=0;
-		       for (int l=0; i< m;i++){
-		            	for (int g=0; j< n;j++){
-		            		vector[k]=subMatriz[l][g];
-		            		 k++;
-		            	}
-		            	
-		       }
-	        return vector[element];
+		/****Funcion que retorna el menor de la lista*******/
+		public PixelWeight min(List<PixelWeight> SubListaOrderPixelWeight, int m, int n) {
+			List<PixelWeight>subListaOrdenada= ordenarLista (SubListaOrderPixelWeight);
+			
+			return subListaOrdenada.get(0);
 	    }
 		
 		
-		public int max(int [][] subMatriz, int m, int n) {
-	        int element = subMatriz.length - 1;
-	        int [] vector=new int [m*n];
-		       
-		       int k=0;
-		       for (int l=0; i< m;i++){
-		            	for (int g=0; j< n;j++){
-		            		vector[k]=subMatriz[l][g];
-		            		 k++;
-		            	}
-		            	
-		       }
-	        return vector[element];
+		/****Funcion que retorna el mayor de la lista*******/
+		public PixelWeight max(List<PixelWeight> SubListaOrderPixelWeight, int m, int n) {
+			List<PixelWeight>subListaOrdenada= ordenarLista (SubListaOrderPixelWeight);
+			
+			return subListaOrdenada.get(subListaOrdenada.size()-1);
 	    }
+	    
 		
 }

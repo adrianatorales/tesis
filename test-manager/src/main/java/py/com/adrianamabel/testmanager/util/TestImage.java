@@ -46,7 +46,7 @@ public class TestImage {
             ExecutorService pool = Executors.newFixedThreadPool(config.CANTIDAD_HILOS_TESTS);
 
             //Escribimos la configuracion en un archivo json
-            mapper.writeValue(new File("C:/Users/toralead/Desktop/Tesis/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
+            mapper.writeValue(new File("/home/adriana/Documentos/recursos/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
             
             logger.info("#, probabilidad, nombre_metodo, compReducido, comp1, comp2, comp3, ventanas, combinacion, dimension_es, refHue, ruido, maeH, maeS, maeV, maeEuclidean, ncd, metricOfSimilarityM1, metricOfSimilarityM2, mae");
 
