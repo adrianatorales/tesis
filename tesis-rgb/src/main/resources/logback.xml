@@ -28,7 +28,7 @@
             <pattern>%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] %m%n</pattern>
         </encoder> 
     </appender>
-    <logger name="py.com.daas" level="DEBUG, INFO"/>
+    <logger name="py.com.adrianamabel" level="DEBUG, INFO"/>
     <root level="DEBUG, INFO">
         <appender-ref ref="ROLLFILEINFO" />
         <appender-ref ref="ROLLFILEDEBUG" />

@@ -14,10 +14,7 @@ import py.com.tesisrgb.generics.BasicFilterAbstract;
 import py.com.tesisrgb.impl.TesisRGBEntropy;
 import py.com.tesisrgb.models.Pixel;
 
-/**
- *
- * @author Derlis Argüello
- */
+
 public class TesisRGBEntropyTest {
 
     /**
@@ -36,12 +33,15 @@ public class TesisRGBEntropyTest {
         
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
-        RgbImage rgbImage = rgbImageJpaController.findRgbImage(5);
+        //RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); //linux
+        RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); 
         
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
         
-        String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored";
+        //String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored"; //linux
+        
+        String pathRestoredImg = "C://Users//toralead//Desktop//Tesis//gaussian//restored";
         
         try {
          
@@ -51,7 +51,8 @@ public class TesisRGBEntropyTest {
           Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
           System.out.println("GUARDANDO IMAGEN RESTAURADA");
           ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
-          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg");
+          //new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux
+          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "//" + imgName + "_" + ".jpg");
           
           System.out.println("METRICA RESULTANTE");
           System.out.println(metricas.toString());

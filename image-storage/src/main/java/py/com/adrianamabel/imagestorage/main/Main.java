@@ -40,7 +40,7 @@ public class Main {
 
         for (int i = config.INDEX_IMAGENES_FROM; i <= config.INDEX_IMAGENES_TO; i++) {
             //leemos la imagen original
-            String originalName = "/Imagen" + i + "." + config.EXTENSION;
+            String originalName = "/img_ruido_gaussian_" + i + "." + config.EXTENSION;
             ImagePlus imgOriginal = new ImagePlus( config.PATH_ORIGINAL_IMAGE + originalName );
             ColorProcessor colImgOriginal = (ColorProcessor) imgOriginal.getProcessor();
 

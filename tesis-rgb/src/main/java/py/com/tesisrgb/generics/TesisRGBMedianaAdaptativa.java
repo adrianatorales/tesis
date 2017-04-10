@@ -5,11 +5,13 @@ import ij.process.ColorProcessor;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
+
 import py.com.tesisrgb.models.PixelWeight;
 
 public class TesisRGBMedianaAdaptativa {
 	
-	
+	static final org.slf4j.Logger logger = LoggerFactory.getLogger(TesisRGBMedianaAdaptativa.class);
 	public int p,q,m,n,c,r,i,j,smax;
 	public int fila, columna, limiteFila, limiteColumna;
 	public PixelWeight x;
@@ -35,10 +37,12 @@ public class TesisRGBMedianaAdaptativa {
 	
 	public  List<PixelWeight> medianaAdaptativa(List<PixelWeight> orderPixelWeight, ColorProcessor restoredColProcessor)
 	{
-		System.out.println("ENTRANDO EN MEDIANA ADAPTATIVA");
+		logger.info("ENTRANDO EN MEDIANA ADAPTATIVA orderPixelWeight={}", orderPixelWeight.toString());
+		
 		int mayorx=0; //COLUMNA MAYOR
 		int mayory=0; //FILA MAYOR
 		int index=0;
+		
 		
 		for (PixelWeight recorrerLista : orderPixelWeight){
 			if (recorrerLista.getPosicionX()>mayorx)
@@ -49,11 +53,13 @@ public class TesisRGBMedianaAdaptativa {
 			
 		}
 		
-		System.out.println("OBTENGO MAYOR MENOR" +mayorx +"  "+mayory);
+		logger.info("OBTENGO MAYOR MENOR ", Integer.toString(mayorx) , " ", Integer.toString(mayory));
+		
 		p=mayory+1; //obtenemos numero de fila
 		q=mayorx+1; //obtenemos el numero de columna
 		
-		System.out.println("OBTENGO p y q" +p +"  "+q);
+		logger.info("OBTENGO NRO FILA Y NRO COLUMNA", Integer.toString(p) , " ", Integer.toString(q));
+		
 		
 		/***ventana que va a crecer hasta 7***/
 		m=3;
@@ -63,26 +69,30 @@ public class TesisRGBMedianaAdaptativa {
 		c=q-n;
 		r=p-m;
 		
-		System.out.println("OBTENGO c y r" +c +"  "+r);
+		logger.info("OBTENGO c Y r ", Integer.toString(c) , " ", Integer.toString(r));
 		i=0;
 		j=0;
 		
 		/***ventana maxima****/
-		smax=7;
-		
+		smax=3;
+		logger.info("VENTANA MAXIMA smax", +smax);
 
 		while (i<=r && m<=smax && n<=smax){
 		       while (j<=c && m<=smax && n<=smax && i<=r){ 
 				
 		           // x=f(i:(i+m-1),j:(j+n-1)); //ABAJO TRADUCCION SUBMATRIZ
-		    	   System.out.println("m-n "+m+"  "+n);
-		    	   System.out.println("OBTENGO valor i, j" +i +"  "+j);
+		    	  
+		    	   logger.info("MASCARA OBTENGO m y n ", Integer.toString(m), " ", Integer.toString(n));
+		    	   logger.info("OBTENGO i y j ",Integer.toString(i), " ", Integer.toString(j));
+		    	  
+		    	   System.out.println("m "+m +"n "+n);
 		    	    x=null;
 		    	    
 		    	    limiteFila=i+m-1;
 		    	    limiteColumna=j+n-1;
 		    	    
-		    	    System.out.println("LIMITE FILA-COLUMNA" +limiteFila +"  "+limiteColumna);
+		    	    logger.info("LIMITE FILA-COLUMNA ", Integer.toString(limiteFila), " ", Integer.toString(limiteColumna));
+		   
 		    	    
 		    	    subListaOrderPixelWeight = new ArrayList<PixelWeight>();
 		            for (int ii=i; ii<= limiteFila;ii++){
@@ -91,7 +101,7 @@ public class TesisRGBMedianaAdaptativa {
 		            	}
 		            }
 		            
-		           
+		            logger.info("SUBLISTA ", subListaOrderPixelWeight.toString());
 		            
 		            zmed =median(subListaOrderPixelWeight,m,n); //obtener peso mediana
 		            
@@ -99,15 +109,17 @@ public class TesisRGBMedianaAdaptativa {
 		           
 		            zmax=max(subListaOrderPixelWeight,m,n); //maximo valor
 		            
-		            System.out.println("zmed " +zmed +" zmin "+zmin+" zmax "+zmax);
-		           
+		            logger.info("MEDIANA-MINIMO-MAXIMO", zmed.toString(), " ", zmin.toString(), " ",zmax.toString());
+		            
+		            
 		            centrox=(int) Math.ceil(m/2)+1;
 		            centroy=(int) Math.ceil(m/2)+1;
 		            
 		            centrox=centrox-1;
 		            centroy=centroy-1;
-		                		
-		            System.out.println("centrox centroy " +centrox+ " centroy "+centroy);
+		              
+		            logger.info("CENTROX-CENTROY ", Integer.toString(centrox), " ", Integer.toString(centroy));
+		          
 		            
 		            for (PixelWeight centro: subListaOrderPixelWeight){  
 				       if(centro.getPosicionX()==centroy && centro.getPosicionY()==centrox){
@@ -116,39 +128,46 @@ public class TesisRGBMedianaAdaptativa {
 				       }
 				     
 		            }		
-		            		
-		            System.out.println("zxy " +zxy); 		
-		          
+		            
+		            logger.info("ZXY ", zxy.toString());
+		            
 		            A1=zmed.getWeight()-zmin.getWeight();
 		           
 		            A2=zmed.getWeight()-zmax.getWeight();
 		            
-		            System.out.println("A1 " +A1);
-		            System.out.println("A2 " +A2);
-		            
+		          
+		            logger.info("A1-A2 ", Double.toString(A1), " ", Double.toString(A2));
 		            
 		            if (A1>0){
 		                if(A2<0){
+		                	
+		                	logger.info("ENTRANDO EN A1>0 A2<0");
+		                	
 		                    B1=zxy.getWeight()-zmin.getWeight();
 		                    B2=zxy.getWeight()-zmax.getWeight();
 
-		                    System.out.println("B1 " +B1);
-		                    System.out.println("B2 " +B2);
+		        
+		                    
+		                    logger.info("B1-B2 ", Double.toString(B1), " ", Double.toString(B2));
 		                    
 		                    if(B1>0 && B2<0){
 		                        
+		                    	logger.info("ENTRANDO EN B1>0 && B2<0");
 		                    	
 		                    	centrox=(int)Math.ceil((i+(i+m-1))/2);
 		                        centroy=(int)Math.ceil((j+(j+n-1))/2);
 		                        
+		                        logger.info("CENTROX-CENTROY ", Integer.toString(centrox), " ", Integer.toString(centroy));
 		                       
 		                        salida=zxy;
+		                        
+		                        logger.info("SALIDA ", salida.toString());
 		                        index=0;
 		                        for (PixelWeight centro: orderPixelWeight){ 
-		     				       if(centro.getPosicionX()==centrox && centro.getPosicionY()==centroy){
+		     				       if(centro.getPosicionX()==centroy && centro.getPosicionY()==centrox){
 		     				    	   centro=salida;
 		     				    	   
-		     				    	   restoredColProcessor.putPixel(centrox, centroy, centro.getPixel());
+		     				    	   restoredColProcessor.putPixel(centroy,  centrox, centro.getPixel());
 		     				    	   break;
 		     				       }
 		     				       index++;
@@ -163,25 +182,30 @@ public class TesisRGBMedianaAdaptativa {
 		                             j=j+1;
 		                        }
 		                       
+		                        logger.info("SALIENDO EN B1>0 && B2<0");
 		                       
 		                    }else{
-		                    	System.out.println("ENTRO EN ZMED ADAPTATIVA");
+		                    	
+		                    	logger.info("ENTRANDO NO CUMPLE B1>0 && B2<0");
+		                    	
 		                        salida=zmed;
 		                        centrox=(int)Math.ceil((i+(i+m-1))/2);
 		                        centroy=(int)Math.ceil((j+(j+n-1))/2);
 		                        
-		                        System.out.println("CENTRO X CENTO Y " +centrox +" "+centroy);
+		                        logger.info("CENTROX-CENTROY ", Integer.toString(centrox), " ", Integer.toString(centroy));
+		                        logger.info("SALIDA ", salida.toString());
+		                       
 		                        
 		                        index=0;
 		                        for (PixelWeight centro: orderPixelWeight){ 
-		     				       if(centro.getPosicionX()==centrox && centro.getPosicionY()==centroy){
+		     				       if(centro.getPosicionX()==centroy && centro.getPosicionY()==centrox){
 		     				    	   centro=salida;
 		     				    	   
-		     				    	   restoredColProcessor.putPixel(centrox, centroy, centro.getPixel());
+		     				    	   restoredColProcessor.putPixel(centroy,centrox , centro.getPixel());
 		     				    	   break;
 		     				       }
 		     				       index++;
-		     				      System.out.println("SALIO DE ZMED ADAPTATIVA");   
+		     				        
 		     		            }
 		                        if(j==c){
 		                            i=i+1;
@@ -190,21 +214,32 @@ public class TesisRGBMedianaAdaptativa {
 		                        }else{
 		                             j=j+1;
 		                        }
+		                        
+		                        logger.info("SALIENDO NO CUMPLE B1>0 && B2<0");
 		                    }
+		                    
+		                    logger.info("SALIENDO EN A1>0 A2<0");
 		                }
+		                
+		                
 		            }else{
+		            	
+		            	logger.info("NO CUMPLE CON A1>0");
 		                    m=m+2;
 		                    n=n+2;
 		                    
+		               logger.info("AUMENTA M-N ",Integer.toString(m), " ", Integer.toString(n));     
 		                    c=q-n;
 		                    r=p-m;
+		                    
+		             logger.info("ACTUALIZA C-R ", Integer.toString(c) , " ", Integer.toString(r)); 
 		            }
 		           
 		       
 		       }
 		}
 		    
-		System.out.println("FIN TERMINO MEDIANA ADAPTATIVA");
+		logger.info("FIN TERMINO MEDIANA ADAPTATIVA");
 		return orderPixelWeight ;
 
 	}
