@@ -68,14 +68,14 @@ public class TesisRGBMedianaAdaptativa {
 		j=0;
 		
 		/***ventana maxima****/
-		smax=3;
+		smax=7;
 		
 
 		while (i<=r && m<=smax && n<=smax){
 		       while (j<=c && m<=smax && n<=smax && i<=r){ 
 				
 		           // x=f(i:(i+m-1),j:(j+n-1)); //ABAJO TRADUCCION SUBMATRIZ
-		    	   
+		    	   System.out.println("m-n "+m+"  "+n);
 		    	   System.out.println("OBTENGO valor i, j" +i +"  "+j);
 		    	    x=null;
 		    	    
@@ -157,7 +157,7 @@ public class TesisRGBMedianaAdaptativa {
 		                        
 		                        if(j==c){
 		                            i=i+1;
-		                            j=1;
+		                            j=0;
 		                           
 		                        }else{
 		                             j=j+1;
@@ -185,7 +185,7 @@ public class TesisRGBMedianaAdaptativa {
 		     		            }
 		                        if(j==c){
 		                            i=i+1;
-		                            j=1;
+		                            j=0;
 		                            
 		                        }else{
 		                             j=j+1;
@@ -196,8 +196,8 @@ public class TesisRGBMedianaAdaptativa {
 		                    m=m+2;
 		                    n=n+2;
 		                    
-		                    c=q-n+1;
-		                    r=p-m+1;
+		                    c=q-n;
+		                    r=p-m;
 		            }
 		           
 		       
