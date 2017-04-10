@@ -5,17 +5,17 @@
  */
 package py.com.adrianamabel.testmanager.util;
 
+
+
 import ij.process.ColorProcessor;
-import py.com.tesisrgb.generics.BasicFilterAbstract;
 
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author Derlis Argüello
- */
+import py.com.tesisrgb.generics.BasicFilterAbstract;
+
+
 public class TaskResult {
     private BasicFilterAbstract basicAbstract;
     private ColorProcessor colProcessor;

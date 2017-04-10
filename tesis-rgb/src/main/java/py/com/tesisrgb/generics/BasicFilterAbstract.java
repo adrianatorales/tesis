@@ -170,11 +170,8 @@ public abstract class BasicFilterAbstract {
         for (int x = 0; x<  width; x++) {
             for (int y = 0; y < height; y++) {
                 pixel = new Pixel(x, y);
-                System.out.println(pixel.getX()+" "+ pixel.getY());
+               
                 realWeight = getRealWeight(pixel);
-                
-                //System.out.println("LLEGO");
-                //elementP = order(realWeight, pixel);
                 /******************agregado**************************/
                 int cLength = channels.length;
                 
@@ -182,31 +179,17 @@ public abstract class BasicFilterAbstract {
                 int[] rgbColor;
                
                 PixelWeight pixelWeight;
-                //int[] filterP;
-                //Pixel p=pixel;
-               // Pixel posicionXY=pixel;
+               
                 double[] weight=realWeight;
-
-                //for (Pixel sePixel : se) {
-                  //  xi = p.getX() + sePixel.getX();
-                    //yi = p.getY() + sePixel.getY();
-                    //verificamos si esta en la ventana del elemento estructurante
-                    //if (xi > -1 && xi < width && yi > -1 && yi < height) {
-                    	//posicionXY=new Pixel(xi,yi);
                         rgbColor = new int[cLength];
-                  //      System.out.println("LLEGO1");
                         for (int channel = 0; channel < cLength; channel++) {
                             rgbColor[channel] = channels[channel].get(x, y);
-                    //        System.out.println("LLEGO2");
                             t = t + weight[channel] * rgbColor[channel];
                         }
-                      //  System.out.println("LLEGO3");
                         pixelWeight = new PixelWeight(rgbColor, t, pixel); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
                         orderPixelWeight.add(pixelWeight);
                         t = 0.0;
-                    //}
-                //}
-                
+              
                 
                 
                 /********************agregado*******************************/

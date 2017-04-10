@@ -5,6 +5,9 @@
  */
 package py.com.adrianamabel.test;
 
+import ij.ImagePlus;
+import ij.io.FileSaver;
+import ij.process.ColorProcessor;
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
 import py.com.tesisrgb.generics.BasicFilterAbstract;
@@ -36,8 +39,25 @@ public class TesisRGBEntropyTest {
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(5);
         
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
+        ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
         
-        tesisRGB.run();
+        String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored";
+        
+        try {
+         
+         String pathRestoredMethodImg = pathRestoredImg;
+         String imgName = "img_ruido";
+          ColorProcessor colImgNoiseRestored = tesisRGB.run();
+          Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
+          System.out.println("GUARDANDO IMAGEN RESTAURADA");
+          ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
+          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg");
+          
+          System.out.println("METRICA RESULTANTE");
+          System.out.println(metricas.toString());
+        } catch (InterruptedException ex) {
+        }
+
         
         System.out.println("FIN DEL PROCESO");
         /*
