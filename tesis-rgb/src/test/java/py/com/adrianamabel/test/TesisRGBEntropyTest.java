@@ -39,20 +39,20 @@ public class TesisRGBEntropyTest {
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
         
-        //String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored"; //linux
+        String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored"; //linux
         
-        String pathRestoredImg = "C://Users//toralead//Desktop//Tesis//gaussian//restored";
+       // String pathRestoredImg = "C://Users//toralead//Desktop//Tesis//gaussian//restored";
         
         try {
          
          String pathRestoredMethodImg = pathRestoredImg;
          String imgName = "img_ruido";
-          ColorProcessor colImgNoiseRestored = tesisRGB.run();
-          Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
-          System.out.println("GUARDANDO IMAGEN RESTAURADA");
-          ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
-          //new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux
-          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "//" + imgName + "_" + ".jpg");
+         ColorProcessor colImgNoiseRestored = tesisRGB.run();
+         Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
+         System.out.println("GUARDANDO IMAGEN RESTAURADA");
+         ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
+         new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux
+          //new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "//" + imgName + "_" + ".jpg");
           
           System.out.println("METRICA RESULTANTE");
           System.out.println(metricas.toString());

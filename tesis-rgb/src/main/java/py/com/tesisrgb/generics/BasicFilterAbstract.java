@@ -181,14 +181,14 @@ public abstract class BasicFilterAbstract {
                 PixelWeight pixelWeight;
                
                 double[] weight=realWeight;
-                        rgbColor = new int[cLength];
-                        for (int channel = 0; channel < cLength; channel++) {
+                rgbColor = new int[cLength];
+                for (int channel = 0; channel < cLength; channel++) {
                             rgbColor[channel] = channels[channel].get(x, y);
                             t = t + weight[channel] * rgbColor[channel];
-                        }
-                        pixelWeight = new PixelWeight(rgbColor, t, pixel); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
-                        orderPixelWeight.add(pixelWeight);
-                        t = 0.0;
+                }
+                pixelWeight = new PixelWeight(rgbColor, t, pixel); //La idea es guardar relacion pixeles vectores de color, su valor t y su posicion con respecto a la imagen x, y
+                orderPixelWeight.add(pixelWeight);
+                t = 0.0;
               
                 
                 
@@ -198,8 +198,8 @@ public abstract class BasicFilterAbstract {
         }
         
       //ENVIAMOS TODO A LA CLASE QUE REALIZA LA MEDIANAADAPTATIVA
-        TesisRGBMedianaAdaptativa medianaAdaptativa= new TesisRGBMedianaAdaptativa();
-        medianaAdaptativa.medianaAdaptativa(orderPixelWeight, this.restoredColProcessor);
+        TesisRGBMedianaAdaptativaCopia medianaAdaptativa= new TesisRGBMedianaAdaptativaCopia();
+        medianaAdaptativa.medianaAdaptativa(orderPixelWeight, this.restoredColProcessor, this.se, this.width, this.height);
 
         xi=0;
 
