@@ -34,7 +34,9 @@ public class TesisRGBEntropyTest {
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         //RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); //linux
-        RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); 
+        RgbImage rgbImage = rgbImageJpaController.findRgbImage(255); 
+      
+        
         
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
@@ -48,7 +50,12 @@ public class TesisRGBEntropyTest {
          String pathRestoredMethodImg = pathRestoredImg;
          String imgName = "img_ruido";
          ColorProcessor colImgNoiseRestored = tesisRGB.run();
-         Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
+         
+         
+         RgbImage rgbImageSinRuido = rgbImageJpaController.findRgbImage(251); 
+         ColorProcessor colImgSinRuido=rgbImageSinRuido.getColorProcessor();
+         
+         Metrics metricas = new Metrics(colImgSinRuido, colImgNoiseRestored);
          System.out.println("GUARDANDO IMAGEN RESTAURADA");
          ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux

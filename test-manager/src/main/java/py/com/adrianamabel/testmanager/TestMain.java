@@ -6,10 +6,7 @@ package py.com.adrianamabel.testmanager;/*
 
 import py.com.adrianamabel.testmanager.util.TestImage;
 
-/**
- *
- * @author Derlis Argüello
- */
+
 public class TestMain {
 
     /**

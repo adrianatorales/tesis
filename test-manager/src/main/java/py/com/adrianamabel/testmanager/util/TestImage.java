@@ -1,7 +1,4 @@
-/*
- * Tesis Arguello Balbuena
- * Derechos Reservados 2015 - 2016
- */
+
 package py.com.adrianamabel.testmanager.util;
 
 import ij.ImagePlus;
@@ -113,6 +110,7 @@ public class TestImage {
                                         for (RgbImage noisyImageTest : noiseImageTestList) {
                                             //ColorProcessor colImgNoise = noisyImageTest.getColorProcessor();
                                             for (Integer roiWindow : windowsRoiList) {
+                                            	System.out.println("Entro a listaventanas");
                                                 BasicFilterAbstract filterMethod = TestAny.getFilterMethod(roiWindow, nombreFiltro, tipoDeFiltro,
                                                     noisyImageTest, desplazamientosSe);
                                                 TestTask testTask = new TestTask(filterMethod, noisyImageTest.getNoiseProbability(), noisyImageTest.getDescription(), roiWindow);

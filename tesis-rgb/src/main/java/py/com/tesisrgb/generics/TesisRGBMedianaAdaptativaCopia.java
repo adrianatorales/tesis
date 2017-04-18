@@ -46,7 +46,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 			ColorProcessor restoredColProcessor, Pixel[] seEight, int width, int height){	
 
 		System.out.println("Entrando en medianaAdaptativa");
-		logger.info("ENTRANDO EN MEDIANA ADAPTATIVA orderPixelWeight={}", orderPixelWeight.toString());
+		
 			
 		smax=3;
 		//para k=3
@@ -102,6 +102,7 @@ public class TesisRGBMedianaAdaptativaCopia {
                 	System.out.println("PUT ZMED");
                 }
             }else{
+            	logger.info("aumentar tamanho ventana");
             	System.out.println("aumentar tamanho ventana");
             }
             	
