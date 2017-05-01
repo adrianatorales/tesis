@@ -1,7 +1,4 @@
-/*
- * Tesis Arguello Balbuena
- * Derechos Reservados 2015
- */
+
 package py.com.tesisrgb.models;
 
 import java.util.Arrays;

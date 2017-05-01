@@ -5,21 +5,18 @@
  */
 package py.com.tesisrgb.impl;
 
+import java.util.List;
+
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.Entropy;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstract;
 import py.com.tesisrgb.generics.Weight;
 import py.com.tesisrgb.models.Pixel;
 
-/**
- *
- * @author Derlis Argüello
- * @Nomenclatura: [Metodo][Orden] 
- * @Ejemplo: [TesisRGB][Mean]
- */
+
 public class TesisRGBEntropy extends TesisRGBBasicAbstract {
 
-    public TesisRGBEntropy(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
+    public TesisRGBEntropy(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se){
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBEntropy");
     }

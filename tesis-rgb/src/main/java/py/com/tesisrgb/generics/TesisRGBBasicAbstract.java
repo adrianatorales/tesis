@@ -12,16 +12,13 @@ import py.com.tesisrgb.models.Pixel;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- *
- * @author Derlis Argüello
- */
+
 public abstract class TesisRGBBasicAbstract extends BasicFilterAbstract {
 
     public List<Window> windowsList = new ArrayList<>();
     public int roiWindow; // Roi coordinate x, y
 
-    public TesisRGBBasicAbstract(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
+    public TesisRGBBasicAbstract(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
         super(filter, rgbImage, se);
         this.roiWindow = roiWindow;
     }
