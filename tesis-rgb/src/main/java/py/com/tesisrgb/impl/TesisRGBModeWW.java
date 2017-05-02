@@ -5,6 +5,8 @@
  */
 package py.com.tesisrgb.impl;
 
+import java.util.List;
+
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.Mode;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstractWW;
@@ -19,7 +21,7 @@ import py.com.tesisrgb.models.Pixel;
  */
 public class TesisRGBModeWW extends TesisRGBBasicAbstractWW {
 
-    public TesisRGBModeWW(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
+    public TesisRGBModeWW(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBModeWW");
     }

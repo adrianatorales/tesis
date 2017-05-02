@@ -35,9 +35,9 @@ public class TesisRGBModeTest {
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(1206269);
         
-        tesisRGB = new TesisRGBMode(3, "Median", rgbImage, seEight);
+       // tesisRGB = new TesisRGBMode(3, "Median", rgbImage, seEight);
         
-        tesisRGB.run();
+        //tesisRGB.run();
         /*
         tesisRGB = new TesisRGBMode(2, "Max", rgbImage, seEight);
         

@@ -18,7 +18,7 @@ public abstract class TesisRGBBasicAbstract extends BasicFilterAbstract {
     public List<Window> windowsList = new ArrayList<>();
     public int roiWindow; // Roi coordinate x, y
 
-    public TesisRGBBasicAbstract(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
+    public TesisRGBBasicAbstract(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]>se) {
         super(filter, rgbImage, se);
         this.roiWindow = roiWindow;
     }
@@ -70,7 +70,7 @@ public abstract class TesisRGBBasicAbstract extends BasicFilterAbstract {
         Pixel pixel = new Pixel(0, 0);
         
         //ITERATE STRUCTURE ELEMENT
-        for (Pixel sePixel : se) {
+        for (Pixel sePixel : se.get(0)) {
             pixel.setX(p.getX() + sePixel.getX());
             pixel.setY(p.getY() + sePixel.getY());
             for (Window window : windowsList) {

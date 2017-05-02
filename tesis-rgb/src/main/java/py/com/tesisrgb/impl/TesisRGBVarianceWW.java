@@ -5,6 +5,8 @@
  */
 package py.com.tesisrgb.impl;
 
+import java.util.List;
+
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstractWW;
 import py.com.tesisrgb.generics.Variance;
@@ -19,7 +21,7 @@ import py.com.tesisrgb.models.Pixel;
  */
 public class TesisRGBVarianceWW extends TesisRGBBasicAbstractWW {
 
-    public TesisRGBVarianceWW(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
+    public TesisRGBVarianceWW(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBVarianceWW");
     }

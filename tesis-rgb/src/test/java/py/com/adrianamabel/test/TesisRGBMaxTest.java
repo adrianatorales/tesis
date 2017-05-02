@@ -35,7 +35,7 @@ public class TesisRGBMaxTest {
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(301);
         
-        tesisRGB = new TesisRGBMax(2, "Median", rgbImage, seEight);
+        /*tesisRGB = new TesisRGBMax(2, "Median", rgbImage, seEight);
         
         tesisRGB.run();
         
@@ -45,7 +45,7 @@ public class TesisRGBMaxTest {
         
         tesisRGB = new TesisRGBMax(2, "Min", rgbImage, seEight);
         
-        tesisRGB.run();
+        tesisRGB.run();*/
     }
     
 }

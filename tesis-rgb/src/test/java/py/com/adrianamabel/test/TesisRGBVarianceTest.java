@@ -35,9 +35,9 @@ public class TesisRGBVarianceTest {
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(1206269);
         
-        tesisRGB = new TesisRGBVariance(3, "Median", rgbImage, seEight);
+        //tesisRGB = new TesisRGBVariance(3, "Median", rgbImage, seEight);
         
-        tesisRGB.run();
+       // tesisRGB.run();
         
 //        tesisRGB = new TesisRGBVariance(1, "Max", rgbImage, seEight);
 //        

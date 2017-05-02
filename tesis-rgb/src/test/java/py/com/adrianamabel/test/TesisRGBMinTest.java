@@ -35,17 +35,17 @@ public class TesisRGBMinTest {
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(301);
         
-        tesisRGB = new TesisRGBMin(2, "Median", rgbImage, seEight);
+       // tesisRGB = new TesisRGBMin(2, "Median", rgbImage, seEight);
         
-        tesisRGB.run();
+        //tesisRGB.run();
         
-        tesisRGB = new TesisRGBMin(2, "Max", rgbImage, seEight);
+        //tesisRGB = new TesisRGBMin(2, "Max", rgbImage, seEight);
         
-        tesisRGB.run();
+       // tesisRGB.run();
         
-        tesisRGB = new TesisRGBMin(2, "Min", rgbImage, seEight);
+        //tesisRGB = new TesisRGBMin(2, "Min", rgbImage, seEight);
         
-        tesisRGB.run();
+        //tesisRGB.run();
     }
     
 }

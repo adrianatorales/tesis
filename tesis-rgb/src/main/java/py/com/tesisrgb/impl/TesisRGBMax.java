@@ -5,6 +5,8 @@
  */
 package py.com.tesisrgb.impl;
 
+import java.util.List;
+
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.Max;
 import py.com.tesisrgb.generics.TesisRGBBasicAbstract;
@@ -19,7 +21,7 @@ import py.com.tesisrgb.models.Pixel;
  */
 public class TesisRGBMax extends TesisRGBBasicAbstract {
 
-    public TesisRGBMax(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
+    public TesisRGBMax(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBMax");
     }

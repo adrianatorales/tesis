@@ -55,7 +55,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 		boolean aumentarVentana=true;
 		
 		
-		while (aumentarVentana && smax<3){
+		while (aumentarVentana && smax<5){
 			logger.info("Comenzando de nuevo");
 			aumentarVentana=false;
 			subListaOrderPixelWeight = new ArrayList<PixelWeight>();
@@ -107,15 +107,14 @@ public class TesisRGBMedianaAdaptativaCopia {
 	                if(B1>0 && B2<0){
 	                	System.out.println("PUT ZXY");
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
-	                	
-	                	
-	 
 	                	orderPixelWeight.get(posicion).setPixel(zxy.getPixel());
+	                	orderPixelWeight.get(posicion).setWeight(zxy.getWeight());
 	                	
 	                }else{
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
 	                	System.out.println("PUT ZMED");
 	                	orderPixelWeight.get(posicion).setPixel(zmed.getPixel());
+	                	orderPixelWeight.get(posicion).setWeight(zmed.getWeight());
 	                }
 	            }else{
 	            	System.out.println("aumentar tamanho ventana"+smax);

@@ -39,11 +39,11 @@ public class TesisRGBMeanTest {
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         RgbImage rgbImage = rgbImageJpaController.findRgbImage(1);
         
-        tesisRGB = new TesisRGBMean(4, "Median", rgbImage, seEight);
+       // tesisRGB = new TesisRGBMean(4, "Median", rgbImage, seEight);
         
-        tesisRGB.run();
+        //tesisRGB.run();
         
-        logger.info(tesisRGB.toString());
+        //logger.info(tesisRGB.toString());
 //        
 //        tesisRGB = new TesisRGBMean(2, "Max", rgbImage, seEight);
 //        
