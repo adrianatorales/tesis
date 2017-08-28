@@ -49,13 +49,13 @@ public class TesisRGBMedianaAdaptativaCopia {
 		System.out.println("Entrando en medianaAdaptativa");
 		
 			
-		smax=0;
+		smax=3;
 		//para k=3
 		int x,y;
 		boolean aumentarVentana=true;
 		
 		
-		while (aumentarVentana && smax<5){
+		while (aumentarVentana && smax<4){
 			logger.info("Comenzando de nuevo");
 			aumentarVentana=false;
 			subListaOrderPixelWeight = new ArrayList<PixelWeight>();
@@ -94,33 +94,25 @@ public class TesisRGBMedianaAdaptativaCopia {
 		        System.out.println(subListaOrderPixelWeight.toString());
 		        int element = (int) Math.ceil(subListaOrderPixelWeight.size() / 2);
 			    zmed = subListaOrderPixelWeight.get(element);
-			       			
-			    A1=zmed.getWeight()-zmin.getWeight();    
-	            A2=zmed.getWeight()-zmax.getWeight();
-	            
+			       			    
 	            subListaOrderPixelWeight=null;
 	        
-	            if(A1>0 && A2<0){
-	            	B1=zxy.getWeight()-zmin.getWeight();    
-	                B2=zxy.getWeight()-zmax.getWeight();
-	                
-	                if(B1>0 && B2<0){
+	            if(zmed.getWeight()>zmin.getWeight() && zmax.getWeight()>zmed.getWeight()){
+	                if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
 	                	System.out.println("PUT ZXY");
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
-	                	orderPixelWeight.get(posicion).setPixel(zxy.getPixel());
-	                	orderPixelWeight.get(posicion).setWeight(zxy.getWeight());
 	                	
 	                }else{
-	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
 	                	System.out.println("PUT ZMED");
-	                	orderPixelWeight.get(posicion).setPixel(zmed.getPixel());
-	                	orderPixelWeight.get(posicion).setWeight(zmed.getWeight());
+	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
+	                	
 	                }
 	            }else{
-	            	System.out.println("aumentar tamanho ventana"+smax);
+	            	//System.out.println("aumentar tamanho ventana"+smax);
 	            	smax=smax+1; //el siguiente seria 5 7
 	            	logger.info("aumentar tamanho ventana");
-	            	System.out.println("aumentar tamanho ventana"+smax);
+	            	//System.out.println("aumentar tamanho ventana"+smax);
+	            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
 	            	aumentarVentana=true;
 	            	break;
 	            }

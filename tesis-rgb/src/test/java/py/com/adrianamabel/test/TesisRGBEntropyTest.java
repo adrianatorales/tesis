@@ -21,9 +21,7 @@ import py.com.tesisrgb.models.PixelWeight;
 
 public class TesisRGBEntropyTest {
 
-    /**
-     * @param args the command line arguments
-     */
+    
     public static void main(String[] args) throws Exception{
 
     	List<Pixel[]> estructurantes = new ArrayList<Pixel[]>(); 
@@ -82,10 +80,11 @@ public class TesisRGBEntropyTest {
         
         //PARA 17
         
-        estructurantes.add(seEight);
-        estructurantes.add(seEight5); 
-        estructurantes.add(seEight7);
-        
+        estructurantes.add(seEight);//0
+        estructurantes.add(seEight5); //1
+        estructurantes.add(seEight7);//2
+        estructurantes.add(seEight9);//3
+        estructurantes.add(seEight11);//4
         
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();

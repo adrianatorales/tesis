@@ -37,7 +37,7 @@ public class TesisRGBMinTest {
         
        // tesisRGB = new TesisRGBMin(2, "Median", rgbImage, seEight);
         
-        //tesisRGB.run();
+       // tesisRGB.run();
         
         //tesisRGB = new TesisRGBMin(2, "Max", rgbImage, seEight);
         
