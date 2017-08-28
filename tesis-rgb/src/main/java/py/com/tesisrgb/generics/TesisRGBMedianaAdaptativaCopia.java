@@ -44,7 +44,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 	public TesisRGBMedianaAdaptativaCopia(){}
 	
 	public List<PixelWeight> medianaAdaptativa(List<PixelWeight> orderPixelWeight, 
-			ColorProcessor restoredColProcessor, List<Pixel[]> seEight, int width, int height){	
+			ColorProcessor restoredColProcessor, Pixel[] seEight, int width, int height){	
 
 		System.out.println("Entrando en medianaAdaptativa");
 		
@@ -67,7 +67,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 				subListaOrderPixelWeight = new ArrayList<PixelWeight>();
 				zxy = recorrerLista;
 				zmin=null;
-				for (Pixel sePixel : seEight.get(smax)) {
+				for (Pixel sePixel : seEight) {
 		            x = recorrerLista.getPosicionX() + sePixel.getX();
 		            y = recorrerLista.getPosicionY() + sePixel.getY();
 		            //verificamos si esta en la ventana del elemento estructurante
@@ -113,8 +113,8 @@ public class TesisRGBMedianaAdaptativaCopia {
 	            	logger.info("aumentar tamanho ventana");
 	            	//System.out.println("aumentar tamanho ventana"+smax);
 	            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
-	            	aumentarVentana=true;
-	            	break;
+	            	//aumentarVentana=true;
+	            	//break;
 	            }
 	            
 	            posicion++;

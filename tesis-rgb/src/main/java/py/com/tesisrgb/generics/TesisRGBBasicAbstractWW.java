@@ -24,7 +24,7 @@ import java.util.List;
 public abstract class TesisRGBBasicAbstractWW extends BasicFilterAbstract {
 
     public TesisRGBBasicAbstractWW(String filter, RgbImage rgbImage,
-			List<Pixel[]> se) {
+			Pixel[] se) {
 		super(filter, rgbImage, se);
 		// TODO Auto-generated constructor stub
 	}
@@ -38,10 +38,10 @@ public abstract class TesisRGBBasicAbstractWW extends BasicFilterAbstract {
     private int cSize;
     private int hSize;
 
-    public TesisRGBBasicAbstractWW(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
+    public TesisRGBBasicAbstractWW(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
         super(filter, rgbImage, se);
         this.roiWindow = roiWindow;
-        seSideSize = (int) Math.sqrt(se.get(0).length);
+        seSideSize = (int) Math.sqrt(se.length);
         xYOffset = seSideSize / 2;
         cSize = channels.length;
         hSize = channels[0].getHistogramSize();

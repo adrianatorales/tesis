@@ -9,8 +9,11 @@ import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.tesisrgb.generics.BasicFilterAbstract;
 import py.com.tesisrgb.impl.*;
 import py.com.tesisrgb.models.Pixel;
+
 import static py.com.adrianamabel.testmanager.util.TestConstants.Filters.TesisRGB.ConVentanas.*;
 import static py.com.adrianamabel.testmanager.util.TestConstants.Filters.TesisRGB.SinVentanas.*;
+
+import java.util.List;
 
 /**
  *

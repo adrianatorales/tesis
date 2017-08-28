@@ -93,7 +93,7 @@ public class TesisRGBEntropyTest {
       
         
         
-        tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, estructurantes);
+        tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
         
         String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored"; //linux

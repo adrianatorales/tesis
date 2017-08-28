@@ -21,7 +21,7 @@ import py.com.tesisrgb.models.Pixel;
  */
 public class TesisRGBMin extends TesisRGBBasicAbstract {
 
-    public TesisRGBMin(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
+    public TesisRGBMin(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBMin");
     }

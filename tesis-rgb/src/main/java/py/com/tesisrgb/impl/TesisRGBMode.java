@@ -21,7 +21,7 @@ import py.com.tesisrgb.models.Pixel;
  */
 public class TesisRGBMode extends TesisRGBBasicAbstract {
 
-    public TesisRGBMode(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]>se) {
+    public TesisRGBMode(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBMode");
     }

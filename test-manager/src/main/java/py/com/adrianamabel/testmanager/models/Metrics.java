@@ -11,10 +11,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author daasalbion
- */
+
 public class Metrics {
     
     private ColorProcessor original, result;

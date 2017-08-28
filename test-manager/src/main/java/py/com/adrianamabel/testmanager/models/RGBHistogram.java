@@ -14,10 +14,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- * @author Derlis Argüello
- */
+
 public class RGBHistogram {
     
     static final Logger logger = LoggerFactory.getLogger(RGBHistogram.class);

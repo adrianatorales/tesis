@@ -38,7 +38,7 @@ public abstract class BasicFilterAbstract {
     public String filterName;
     public String filter;
     
-    public List<Pixel[]> se;
+    public Pixel[] se;
     
     public String [] components = {"R", "G", "B"};
     //defaultOrder
@@ -55,7 +55,7 @@ public abstract class BasicFilterAbstract {
     
 
 
-    public BasicFilterAbstract(String filter, RgbImage rgbImage, List<Pixel[]> se) {
+    public BasicFilterAbstract(String filter, RgbImage rgbImage, Pixel[] se) {
         //set noisyColProcessor data
         rgbImage.setChannelData();
         
@@ -81,7 +81,7 @@ public abstract class BasicFilterAbstract {
         PixelWeight pixelWeight;
         int[] filterP;
 
-        for (Pixel sePixel : se.get(0)) {
+        for (Pixel sePixel : se) {
             x = p.getX() + sePixel.getX();
             y = p.getY() + sePixel.getY();
             //verificamos si esta en la ventana del elemento estructurante

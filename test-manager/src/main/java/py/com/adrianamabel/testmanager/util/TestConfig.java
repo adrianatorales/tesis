@@ -29,8 +29,8 @@ public class TestConfig {
         //Ruidos.Pepper.class
     };
     
-    public double PROBABILIDAD_RUIDO_FROM = 0.165;
-    public double PROBABILIDAD_RUDO_TO = 0.165;
+    public double PROBABILIDAD_RUIDO_FROM = 0.225;
+    public double PROBABILIDAD_RUDO_TO = 0.225;
     public double PROBABILIDAD_RUIDO_STEP = 0.01;
     public int PROBABILIDAD_RUIDO_CANT = (int)(PROBABILIDAD_RUDO_TO/PROBABILIDAD_RUIDO_STEP);
     
@@ -48,8 +48,8 @@ public class TestConfig {
     public int INDEX_IMAGENES_FROM = 100;
     public int INDEX_IMAGENES_TO = 100;
 
-    public String BASE_PATH = "/home/adriana/Documentos/recursos/test/images"; //linux
-    //public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/"; //windows
+    //public String BASE_PATH = "/home/adriana/Documentos/recursos/test/images"; //linux
+    public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/"; //windows
     public String PATH_ORIGINAL_IMAGE = BASE_PATH + "test";
     public String NOISY_PATH_SUFFIX = "/noisy";
     public String RESTORED_PATH_SUFFIX = "/restored";

@@ -16,7 +16,7 @@ import py.com.tesisrgb.models.Pixel;
 
 public class TesisRGBEntropy extends TesisRGBBasicAbstract {
 
-    public TesisRGBEntropy(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se){
+    public TesisRGBEntropy(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se){
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBEntropy");
     }

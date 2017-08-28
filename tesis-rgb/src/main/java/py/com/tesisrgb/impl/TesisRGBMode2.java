@@ -21,7 +21,7 @@ import java.util.List;
  */
 public class TesisRGBMode2 extends TesisRGBBasicAbstract {
 
-    public TesisRGBMode2(int roiWindow, String filter, RgbImage rgbImage, List<Pixel[]> se) {
+    public TesisRGBMode2(int roiWindow, String filter, RgbImage rgbImage, Pixel[] se) {
         super(roiWindow, filter, rgbImage, se);
         setFilterName("TesisRGBMode");
     }

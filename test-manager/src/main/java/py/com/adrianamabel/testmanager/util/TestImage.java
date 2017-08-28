@@ -1,18 +1,4 @@
-
 package py.com.adrianamabel.testmanager.util;
-
-import ij.ImagePlus;
-import ij.io.FileSaver;
-import ij.process.ColorProcessor;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.slf4j.LoggerFactory;
-
-import py.com.adrianamabel.imagestorage.models.RgbImage;
-import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
-import py.com.adrianamabel.testmanager.models.Metrics;
-import py.com.tesisrgb.generics.BasicFilterAbstract;
-import py.com.tesisrgb.models.Pixel;
 
 import java.io.File;
 import java.io.IOException;
@@ -22,11 +8,20 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import org.codehaus.jackson.map.ObjectMapper;
+import org.slf4j.LoggerFactory;
 
-/**
- *
- * @author Derlis Argüello
- */
+import ij.ImagePlus;
+import ij.io.FileSaver;
+import ij.process.ColorProcessor;
+import py.com.adrianamabel.imagestorage.models.RgbImage;
+import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
+import py.com.tesisrgb.generics.BasicFilterAbstract;
+import py.com.tesisrgb.models.Pixel;
+
+
+
+
 public class TestImage {
     
     static final org.slf4j.Logger logger = LoggerFactory.getLogger(TestImage.class);
@@ -43,7 +38,11 @@ public class TestImage {
             ExecutorService pool = Executors.newFixedThreadPool(config.CANTIDAD_HILOS_TESTS);
 
             //Escribimos la configuracion en un archivo json
-            mapper.writeValue(new File("/home/adriana/Documentos/recursos/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
+            //linux mapper.writeValue(new File("/home/adriana/Documentos/recursos/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
+            
+            mapper.writeValue(new File("C:/Users/toralead/Desktop/Tesis/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
+            
+            
             
             logger.info("#, probabilidad, nombre_metodo, compReducido, comp1, comp2, comp3, ventanas, combinacion, dimension_es, refHue, ruido, maeH, maeS, maeV, maeEuclidean, ncd, metricOfSimilarityM1, metricOfSimilarityM2, mae");
 
@@ -105,7 +104,7 @@ public class TestImage {
                                     //por cada dimension de elemento estructurante
                                     for (int j = config.N_SE_FROM; j <= config.N_SE_TO; j+=config.N_SE_STEP) {
                                         //calculamos el vector de desplazamientos segun la dimension del SE
-                                        Pixel[] desplazamientosSe = getShiftArray(j);
+                                    	Pixel[] desplazamientosSe = getShiftArray(j);
                                         List<Future<TaskResult>> futures = new ArrayList<Future<TaskResult>>(windowsRoiList.length);
                                         for (RgbImage noisyImageTest : noiseImageTestList) {
                                             //ColorProcessor colImgNoise = noisyImageTest.getColorProcessor();
@@ -122,9 +121,9 @@ public class TestImage {
                                             try {
 
                                                 ColorProcessor colImgNoiseRestored = taskResult.get().getColProcessor();
-                                                Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
+                                                //Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
                                                 //logger.info(i + ", "  + ventanas[0] + "x" + ventanas[1] + ", " + noiseName + ", " + s +  ", " + nombreFiltro + ", " + combinacion + ", " + j + ", " + metricas.mae() + ", " + metricas.mse() + ", " + metricas.nmse() + ", " + TestAny.decisionValorReducido + ", " + TestAny.decisionComp[0] + ", " + TestAny.decisionComp[1] + ", " + TestAny.decisionComp[2]);
-                                                logger.info(taskResult.get().toString() + ", "  + combinacion + ", " + j +  ", " + refHue + ", " + noiseName + ", " + metricas.toString());
+                                                //logger.info(taskResult.get().toString() + ", "  + combinacion + ", " + j +  ", " + refHue + ", " + noiseName + ", " + metricas.toString());
                                                 if(config.GUARDAR_IMAGENES){
                                                     ImagePlus imgPlus = new ImagePlus(nombreFiltro, colImgNoiseRestored);
                                                     new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + taskResult.get().toString() + ".jpg");
