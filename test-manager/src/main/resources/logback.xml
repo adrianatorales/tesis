@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="ROLLFILEDEBUG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>      
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+            <FileNamePattern>test-manager/logs/testManager.DEBUG.%d{yyyy-MM-dd}.log</FileNamePattern>       
+            <MaxHistory>30</MaxHistory>     
+        </rollingPolicy>      
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} %-5level [%thread][%logger{0}] %m%n</pattern>
+        </encoder> 
+    </appender>
+    <appender name="ROLLFILEINFO" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>      
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy"> 
+            <FileNamePattern>test-manager/logs/testManager.INFO.%d{yyyy-MM-dd}.log</FileNamePattern>       
+            <MaxHistory>30</MaxHistory>     
+        </rollingPolicy>      
+        <encoder>
+            <pattern>%m%n</pattern>
+        </encoder> 
+    </appender>
+    <logger name="py.com.daas" level="DEBUG, INFO"/>
+    <root level="DEBUG, INFO">
+        <appender-ref ref="ROLLFILEINFO" />
+        <appender-ref ref="ROLLFILEDEBUG" />
+    </root>
+</configuration>
