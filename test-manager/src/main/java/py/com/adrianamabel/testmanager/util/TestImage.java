@@ -40,7 +40,8 @@ public class TestImage {
             //Escribimos la configuracion en un archivo json
             //linux mapper.writeValue(new File("/home/adriana/Documentos/recursos/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
             
-            mapper.writeValue(new File("C:/Users/toralead/Desktop/Tesis/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
+            
+            mapper.writeValue(new File("C:/Users/Silvia Torales/Documents/TESIS/images/logs/"+ config.NOMBRE_ARCHIVO_LOG + ".json"), config);
             
             
             

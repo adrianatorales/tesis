@@ -89,14 +89,14 @@ public class TesisRGBEntropyTest {
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         //RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); //linux
-        RgbImage rgbImage = rgbImageJpaController.findRgbImage(255); 
+        RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); 
       
         
         
         tesisRGB = new TesisRGBEntropy(1, "Median", rgbImage, seEight);
         ColorProcessor colImgOriginal=rgbImage.getColorProcessor();
         
-        String pathRestoredImg = "/home/adriana/Documentos/recursos/test/restored"; //linux
+        String pathRestoredImg = "C://Users//Silvia Torales//Documents//TESIS//images//impulsive//restored//TesisRGBMode2"; //linux
         
        // String pathRestoredImg = "C://Users//toralead//Desktop//Tesis//gaussian//restored";
         
@@ -107,14 +107,14 @@ public class TesisRGBEntropyTest {
          ColorProcessor colImgNoiseRestored = tesisRGB.run();
          
          
-         RgbImage rgbImageSinRuido = rgbImageJpaController.findRgbImage(251); 
+         RgbImage rgbImageSinRuido = rgbImageJpaController.findRgbImage(1); 
          ColorProcessor colImgSinRuido=rgbImageSinRuido.getColorProcessor();
          
          Metrics metricas = new Metrics(colImgSinRuido, colImgNoiseRestored);
          System.out.println("GUARDANDO IMAGEN RESTAURADA");
          ImagePlus imgPlus = new ImagePlus("TesisRGBMode2", colImgNoiseRestored);
-         new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux
-          //new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "//" + imgName + "_" + ".jpg");
+         //new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + ".jpg"); //linux
+          new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "//" + imgName + "_" + ".jpg");
           
           System.out.println("METRICA RESULTANTE");
           System.out.println(metricas.toString());

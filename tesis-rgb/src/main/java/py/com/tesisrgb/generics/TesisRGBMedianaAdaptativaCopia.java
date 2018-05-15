@@ -15,7 +15,7 @@ import py.com.tesisrgb.models.TesisComparator;
 
 public class TesisRGBMedianaAdaptativaCopia {
 	
-	static final org.slf4j.Logger logger = LoggerFactory.getLogger(TesisRGBMedianaAdaptativa.class);
+	static final org.slf4j.Logger logger = LoggerFactory.getLogger(TesisRGBMedianaAdaptativaCopia.class);
 	public int p,q,m,n,c,r,i,j,smax;
 	public int fila, columna, limiteFila, limiteColumna;
 	public PixelWeight x;
@@ -108,13 +108,20 @@ public class TesisRGBMedianaAdaptativaCopia {
 	                	
 	                }
 	            }else{
-	            	//System.out.println("aumentar tamanho ventana"+smax);
-	            	smax=smax+1; //el siguiente seria 5 7
-	            	logger.info("aumentar tamanho ventana");
-	            	//System.out.println("aumentar tamanho ventana"+smax);
-	            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
-	            	//aumentarVentana=true;
-	            	//break;
+	            	if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
+	                	System.out.println("PUT ZXY2");
+	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
+	            	}else{
+	            	
+		            	smax=smax+1; //el siguiente seria 5 7
+		            	logger.info("aumentar tamanho ventana");
+		            	System.out.println("PUT ZMED2");
+		            	//System.out.println("aumentar tamanho ventana"+smax);
+		            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
+		            	//aumentarVentana=true;
+		            	//break;
+	            	}
+		            	
 	            }
 	            
 	            posicion++;
