@@ -7,6 +7,8 @@
     <class>py.com.adrianamabel.imagestorage.models.RgbImageDataChannelRed</class>
     <class>py.com.adrianamabel.imagestorage.models.RgbImageDataChannelBlue</class>
     <class>py.com.adrianamabel.imagestorage.models.RgbWindow</class>
+    <class>py.com.adrianamabel.imagestorage.models.Resultado</class>
+    <class>py.com.adrianamabel.imagestorage.models.ResultadoPK</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/tesisdt"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>

@@ -312,4 +312,21 @@ public class RgbImageJpaController implements Serializable {
 //                .getResultList();
 //    }
 
+    public void createResultado(Resultado resultado) throws  Exception {
+
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(resultado);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
 }

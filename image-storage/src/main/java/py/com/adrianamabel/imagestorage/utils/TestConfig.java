@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class TestConfig {
     
-    public List<Integer> WINDOWSLIST = Arrays.asList(1, 5, 7);
+    public List<Integer> WINDOWSLIST = Arrays.asList(1);
     
     public Class[] RUIDOS = {
         //Ruidos.Gaussian.class
@@ -28,9 +28,9 @@ public class TestConfig {
         //Ruidos.Pepper.class
     };
     
-    public double PROBABILIDAD_RUIDO_FROM = 0.165;
-    public double PROBABILIDAD_RUDO_TO = 0.165;
-    public double PROBABILIDAD_RUIDO_STEP = 0.165;
+    public double PROBABILIDAD_RUIDO_FROM = 0.01;
+    public double PROBABILIDAD_RUDO_TO = 0.25;
+    public double PROBABILIDAD_RUIDO_STEP = 0.01;
     public int PROBABILIDAD_RUIDO_CANT = (int)(PROBABILIDAD_RUDO_TO/PROBABILIDAD_RUIDO_STEP);
     
     public int CANTIDAD_HILOS_TESTS = 10;
@@ -44,10 +44,10 @@ public class TestConfig {
         {2, 1, 0}
     };
     
-    public int INDEX_IMAGENES_FROM = 100;
-    public int INDEX_IMAGENES_TO = 100;
+    public int INDEX_IMAGENES_FROM = 99;
+    public int INDEX_IMAGENES_TO = 99;
     
-    public String BASE_PATH = "/home/adriana/Documentos/recursos/test/images"; //linux
+    public String BASE_PATH = "C:/Users/Silvia Torales/Documents/TESIS/images/";
     //public String BASE_PATH="C:/Users/toralead/Desktop/Tesis/"; //windows
     public String PATH_ORIGINAL_IMAGE = BASE_PATH + "test";
     public String NOISY_PATH_SUFFIX = "/noisy";

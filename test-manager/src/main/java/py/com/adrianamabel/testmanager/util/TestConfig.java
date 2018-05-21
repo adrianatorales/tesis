@@ -29,9 +29,9 @@ public class TestConfig {
             //Ruidos.Pepper.class
     };
     
-    public double PROBABILIDAD_RUIDO_FROM = 0.245;
-    public double PROBABILIDAD_RUDO_TO = 0.245;
-    public double PROBABILIDAD_RUIDO_STEP = 0.245;
+    public double PROBABILIDAD_RUIDO_FROM = 0.01;
+    public double PROBABILIDAD_RUDO_TO = 0.25;
+    public double PROBABILIDAD_RUIDO_STEP = 0.01;
     public int PROBABILIDAD_RUIDO_CANT = (int)(PROBABILIDAD_RUDO_TO/PROBABILIDAD_RUIDO_STEP);
     
     public int CANTIDAD_HILOS_TESTS = 10;
@@ -60,7 +60,7 @@ public class TestConfig {
             
     public int N_SE_FROM = 3;
     public int N_SE_TO = 3;
-    public int N_SE_STEP = 2;
+    public int N_SE_STEP = 3;
     
     //se puede inicializar filtros aqui indicando los nombres de los filtros (clase TestConstants)
     //List<String> FILTROS = Arrays.asList(TESIS_RGB_ENTROPY, TESIS_RGB_MEAN, TESIS_RGB_S_DEVIATION);

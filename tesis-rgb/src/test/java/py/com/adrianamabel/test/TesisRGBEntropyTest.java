@@ -89,7 +89,7 @@ public class TesisRGBEntropyTest {
         BasicFilterAbstract tesisRGB;
         RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
         //RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); //linux
-        RgbImage rgbImage = rgbImageJpaController.findRgbImage(5); 
+        RgbImage rgbImage = rgbImageJpaController.findRgbImage(61); 
       
         
         

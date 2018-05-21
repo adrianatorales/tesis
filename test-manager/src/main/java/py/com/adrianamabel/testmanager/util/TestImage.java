@@ -14,8 +14,11 @@ import org.slf4j.LoggerFactory;
 import ij.ImagePlus;
 import ij.io.FileSaver;
 import ij.process.ColorProcessor;
+import py.com.adrianamabel.imagestorage.models.Resultado;
+import py.com.adrianamabel.imagestorage.models.ResultadoPK;
 import py.com.adrianamabel.imagestorage.models.RgbImage;
 import py.com.adrianamabel.imagestorage.utils.RgbImageJpaController;
+import py.com.adrianamabel.testmanager.models.Metrics;
 import py.com.tesisrgb.generics.BasicFilterAbstract;
 import py.com.tesisrgb.models.Pixel;
 
@@ -122,14 +125,48 @@ public class TestImage {
                                             try {
 
                                                 ColorProcessor colImgNoiseRestored = taskResult.get().getColProcessor();
-                                                //Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
-                                                //logger.info(i + ", "  + ventanas[0] + "x" + ventanas[1] + ", " + noiseName + ", " + s +  ", " + nombreFiltro + ", " + combinacion + ", " + j + ", " + metricas.mae() + ", " + metricas.mse() + ", " + metricas.nmse() + ", " + TestAny.decisionValorReducido + ", " + TestAny.decisionComp[0] + ", " + TestAny.decisionComp[1] + ", " + TestAny.decisionComp[2]);
-                                                //logger.info(taskResult.get().toString() + ", "  + combinacion + ", " + j +  ", " + refHue + ", " + noiseName + ", " + metricas.toString());
+                                                Metrics metricas = new Metrics(colImgOriginal, colImgNoiseRestored);
+                                                Resultado resultado = new Resultado();
+                                                
+                                                
+                                                String valoresMetricas[] = metricas.toString().split(",");
+                                                String valoresTaskResult[] = taskResult.get().toString().split(",");
+                                                   
+                                                ResultadoPK resultadoPK = new ResultadoPK();
+                                                resultadoPK.setNumeroImagen(Double.parseDouble(valoresTaskResult[0].trim().toString()));
+                                                resultadoPK.setProbabilidad(Double.parseDouble(valoresTaskResult[1].trim().toString()));
+                                                resultadoPK.setNombreMetodo(valoresTaskResult[2].trim().toString());
+                                                resultadoPK.setCombinacion(combinacion);
+                                                resultadoPK.setDimensionEs(j);
+                                                resultadoPK.setVentanas(valoresTaskResult[7]==null?0:Double.parseDouble(valoresTaskResult[7].trim().toString()));
+                                                resultadoPK.setRefHue(refHue);
+                                                resultadoPK.setRuido(noiseName);
+                                                
+                                                
+                                                
+                                                resultado.setMaeEuclidean(Double.parseDouble((valoresMetricas[3].trim().toString())));
+                                                resultado.setNcd(valoresMetricas[4]==null?0:Double.parseDouble((valoresMetricas[4].trim().toString())));
+                                                resultado.setMetricOfSimilarityM1(Double.parseDouble((valoresMetricas[5].trim().toString())));
+                                                resultado.setMetricOfSimilarityM2(Double.parseDouble((valoresMetricas[6].trim().toString())));
+                                                resultado.setMaeMarginal(Double.parseDouble((valoresMetricas[7].trim().toString())));
+                                                resultado.setCompReducido(valoresTaskResult[3]==null?0:Double.parseDouble(valoresTaskResult[3].trim().toString()));
+                                                resultado.setComp1(valoresTaskResult[4]==null?null:valoresTaskResult[4].trim().toString());
+                                                resultado.setComp2(valoresTaskResult[5]==null?null:valoresTaskResult[5].trim().toString());
+                                                resultado.setComp3(valoresTaskResult[6]==null?null:valoresTaskResult[6].trim().toString());
+                                                
+                                                resultado.setId(resultadoPK);
+                                                
+                                                RgbImageJpaController rgbImageJpaController = new RgbImageJpaController();
+                                                rgbImageJpaController.createResultado(resultado);
+                                                
+                                                
+                                                logger.info(taskResult.get().toString() + ", "  + combinacion + ", " + j +  ", " + refHue + ", " + noiseName + ", " + metricas.toString());
                                                 if(config.GUARDAR_IMAGENES){
                                                     ImagePlus imgPlus = new ImagePlus(nombreFiltro, colImgNoiseRestored);
                                                     new FileSaver(imgPlus).saveAsPng(pathRestoredMethodImg + "/" + imgName + "_" + taskResult.get().toString() + ".jpg");
                                                 }
                                             } catch (InterruptedException ex) {
+                                            	System.out.println(ex.getMessage());
                                             }
                                         }
                                     }

@@ -55,7 +55,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 		boolean aumentarVentana=true;
 		
 		
-		while (aumentarVentana && smax<4){
+		//while (aumentarVentana && smax<4){
 			logger.info("Comenzando de nuevo");
 			aumentarVentana=false;
 			subListaOrderPixelWeight = new ArrayList<PixelWeight>();
@@ -100,26 +100,115 @@ public class TesisRGBMedianaAdaptativaCopia {
 	            if(zmed.getWeight()>zmin.getWeight() && zmax.getWeight()>zmed.getWeight()){
 	                if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
 	                	System.out.println("PUT ZXY");
+	                	logger.info("PUT ZXY");
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	                	
 	                }else{
 	                	System.out.println("PUT ZMED");
+	                	logger.info("PUT ZMED");
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
 	                	
 	                }
 	            }else{
 	            	if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
 	                	System.out.println("PUT ZXY2");
+	                	logger.info("PUT ZXY2");
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	            	}else{
 	            	
-		            	smax=smax+1; //el siguiente seria 5 7
-		            	logger.info("aumentar tamanho ventana");
-		            	System.out.println("PUT ZMED2");
-		            	//System.out.println("aumentar tamanho ventana"+smax);
-		            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
-		            	//aumentarVentana=true;
-		            	//break;
+	            		//LA MEDIANA ES UN RUIDO SE HALLA P1 P2 P3 P4
+	            		int xxx,yyy;
+	            		
+	            		System.out.println("zmed. "+zmed.toString());
+	            		System.out.println("zxy. "+zxy.toString());
+	            		System.out.println("zmin. "+zmin.toString());
+	            		System.out.println("zmax. "+zmax.toString());
+	            		
+	            		yyy=zxy.getPosicionY();
+	            		xxx=zxy.getPosicionX();
+	            		
+	            		System.out.println("xxx. "+xxx);
+	            		System.out.println("yyy. "+xxx);
+	            		int[] P1 = null;
+	            		int[] P2 = null;
+	            		int[] P3 = null;
+	            		int[] P4 = null;
+	            		int Rojo=0 , Verde=0, Azul=0;
+	            		int suma=0;
+	            		
+	            		int[] PixelRGB = null;
+	            		
+	            		if(yyy-1>0 && xxx-1>0){
+	            			P1 = restoredColProcessor.getPixel(xxx-1, yyy-1, null);
+	            			suma++;
+	            		}
+	            		if(yyy-1>0){
+	            			P2 = restoredColProcessor.getPixel(xxx, yyy-1, null);
+	            			suma++;
+	            		}
+	            		if(xxx-1>0){
+	            			P3 = restoredColProcessor.getPixel(xxx-1, yyy, null);
+	            			suma++;
+	            			
+	            			if(yyy+1<=height){
+	            				P4 = restoredColProcessor.getPixel(xxx-1, yyy+1, null);
+	            				suma++;
+	            			}
+	            		}	
+	            		
+	            		if(P1!=null){
+	            			Rojo = P1[0];
+	            			Verde = P1[1];
+	            			Azul = P1[2];
+	            		}
+	            		
+	            		if(P2!=null){
+	            			Rojo = Rojo + P2[0];
+	            			Verde = Verde + P2[1];
+	            			Azul = Azul + P2[2];
+	            		}
+	            		
+	            		if(P3!=null){
+	            			Rojo = Rojo + P3[0];
+	            			Verde = Verde + P3[1];
+	            			Azul = Azul + P3[2];
+	            		}
+	            		
+	            		if(P4!=null){
+	            			Rojo = Rojo + P4[0];
+	            			Verde = Verde + P4[1];
+	            			Azul = Azul + P4[2];
+	            		}
+	            		
+	            		System.out.println("suma. "+suma);
+	            		
+	            		if(suma>0){
+		            		Rojo = (int) Math.ceil(Rojo/suma);
+		            		Verde = (int) Math.ceil(Verde/suma);
+		            		Azul = (int) Math.ceil(Azul/suma);
+		            		
+		            		PixelRGB = new int[3];
+		            		PixelRGB[0] = Rojo;
+		            		PixelRGB[1] = Verde;
+		            		PixelRGB[2] = Azul;
+		            		
+		            		
+			            	logger.info("PUT PixelRGB");
+			            	System.out.println("PUT PixelRGB");
+			            	
+			            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), PixelRGB);
+		            		
+	            		}else{
+	            			logger.info("PUT PixelRGBzxy");
+			            	System.out.println("PUT PixelRGBzxy");
+			            	
+			            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
+	            		}
+	            			
+	            		
+	            		
+	            		
+		            	
 	            	}
 		            	
 	            }
@@ -127,7 +216,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 	            posicion++;
 			
 			}//primer for
-		}//while
+	//	}//while
 		System.out.println("Saliendo en medianaAdaptativa");
 		
 		return   orderPixelWeight;
