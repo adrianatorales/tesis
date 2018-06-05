@@ -38,7 +38,7 @@ public class TesisRGBMedianaAdaptativaCopia {
 	private List<PixelWeight> ordenadoOrderPixelWeight;
 	private List<PixelWeight> descartarGuardado;
 	public ColorProcessor restoredColProcessor;
-
+	private List<int[]> subLista;
 	
 	
 	public TesisRGBMedianaAdaptativaCopia(){}
@@ -99,25 +99,28 @@ public class TesisRGBMedianaAdaptativaCopia {
 	        
 	            if(zmed.getWeight()>zmin.getWeight() && zmax.getWeight()>zmed.getWeight()){
 	                if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
-	                	System.out.println("PUT ZXY");
-	                	logger.info("PUT ZXY");
+	                	logger.info("RESTAURA ZXY EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+	            		logger.info("RESTAURA ZXY: "+zxy.getPixel()[0]+","+zxy.getPixel()[1]+","+zxy.getPixel()[2]);
+	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	                	
 	                }else{
-	                	System.out.println("PUT ZMED");
-	                	logger.info("PUT ZMED");
+	                	logger.info("RESTAURA ZMED EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+	            		logger.info("RESTAURA ZMED: "+zmed.getPixel()[0]+","+zmed.getPixel()[1]+","+zmed.getPixel()[2]);
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zmed.getPixel());
 	                	
 	                }
 	            }else{
 	            	if(zxy.getWeight()>zmin.getWeight() && zmax.getWeight()>zxy.getWeight()){
-	                	System.out.println("PUT ZXY2");
-	                	logger.info("PUT ZXY2");
+	            		logger.info("RESTAURA ZXY EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+	            		logger.info("RESTAURA ZXY: "+zxy.getPixel()[0]+","+zxy.getPixel()[1]+","+zxy.getPixel()[2]);
 	                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	            	}else{
 	            	
 	            		//LA MEDIANA ES UN RUIDO SE HALLA P1 P2 P3 P4
 	            		int xxx,yyy;
+	            		logger.info("PIXEL ZXY EN CUESTION: "+zxy.getPixel()[0]+","+zxy.getPixel()[1]+","+zxy.getPixel()[2]);
+	            		
 	            		
 	            		System.out.println("zmed. "+zmed.toString());
 	            		System.out.println("zxy. "+zxy.toString());
@@ -127,81 +130,67 @@ public class TesisRGBMedianaAdaptativaCopia {
 	            		yyy=zxy.getPosicionY();
 	            		xxx=zxy.getPosicionX();
 	            		
-	            		System.out.println("xxx. "+xxx);
-	            		System.out.println("yyy. "+xxx);
+	            		logger.info("xxx. "+xxx);
+	            		logger.info("yyy. "+yyy);
 	            		int[] P1 = null;
 	            		int[] P2 = null;
 	            		int[] P3 = null;
 	            		int[] P4 = null;
-	            		int Rojo=0 , Verde=0, Azul=0;
-	            		int suma=0;
 	            		
-	            		int[] PixelRGB = null;
+	            		subLista = null;
+	    			    subLista = new ArrayList<int[]>();
 	            		
-	            		if(yyy-1>0 && xxx-1>0){
+	            		if(yyy-1>=0 && xxx-1>=0){
+	            		
+	            			logger.info("obtengo P1: "+(xxx-1)+","+ (yyy-1));
 	            			P1 = restoredColProcessor.getPixel(xxx-1, yyy-1, null);
-	            			suma++;
+	            			logger.info("obtengo P1: "+P1[0]+","+P1[1]+","+P1[2] );
+	            			subLista.add(P1);
 	            		}
-	            		if(yyy-1>0){
+	            		if(yyy-1>=0){
+	            			
+	            			logger.info("obtengo P2: "+(xxx)+","+ (yyy-1));
 	            			P2 = restoredColProcessor.getPixel(xxx, yyy-1, null);
-	            			suma++;
+	            			logger.info("obtengo P2: "+P2[0]+","+P2[1]+","+P2[2] );
+	            			subLista.add(P2);
 	            		}
-	            		if(xxx-1>0){
+	            		if(xxx-1>=0){
+	            		
+	            			logger.info("obtengo P3: "+(xxx-1)+","+ yyy);
 	            			P3 = restoredColProcessor.getPixel(xxx-1, yyy, null);
-	            			suma++;
+	            			logger.info("obtengo P3: "+P3[0]+","+P3[1]+","+P3[2] );
+	            			subLista.add(P3);
 	            			
 	            			if(yyy+1<=height){
+	            				
+	            				logger.info("obtengo P4: "+(xxx-1)+","+ (yyy+1));
 	            				P4 = restoredColProcessor.getPixel(xxx-1, yyy+1, null);
-	            				suma++;
+	            				logger.info("obtengo P4: "+P4[0]+","+P4[1]+","+P4[2] );
+	            				subLista.add(P4);
 	            			}
 	            		}	
 	            		
-	            		if(P1!=null){
-	            			Rojo = P1[0];
-	            			Verde = P1[1];
-	            			Azul = P1[2];
-	            		}
 	            		
-	            		if(P2!=null){
-	            			Rojo = Rojo + P2[0];
-	            			Verde = Verde + P2[1];
-	            			Azul = Azul + P2[2];
-	            		}
-	            		
-	            		if(P3!=null){
-	            			Rojo = Rojo + P3[0];
-	            			Verde = Verde + P3[1];
-	            			Azul = Azul + P3[2];
-	            		}
-	            		
-	            		if(P4!=null){
-	            			Rojo = Rojo + P4[0];
-	            			Verde = Verde + P4[1];
-	            			Azul = Azul + P4[2];
-	            		}
-	            		
-	            		System.out.println("suma. "+suma);
-	            		
-	            		if(suma>0){
-		            		Rojo = (int) Math.ceil(Rojo/suma);
-		            		Verde = (int) Math.ceil(Verde/suma);
-		            		Azul = (int) Math.ceil(Azul/suma);
-		            		
-		            		PixelRGB = new int[3];
-		            		PixelRGB[0] = Rojo;
-		            		PixelRGB[1] = Verde;
-		            		PixelRGB[2] = Azul;
-		            		
-		            		
-			            	logger.info("PUT PixelRGB");
-			            	System.out.println("PUT PixelRGB");
-			            	
-			            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), PixelRGB);
-		            		
+	            		if(!subLista.isEmpty()){
+	            			if(subLista.size()==1){
+	            				logger.info("RESTAURA PUT UN ELEMENTO EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+				            	logger.info("PUT ZMED UN ELEMENTO "+ subLista.get(0)[0]+","+ subLista.get(0)[1]+","+ subLista.get(0)[2] );
+				            	
+	            				restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), subLista.get(0));
+	            			}else{
+	            				
+	            				int elementMediana = (int) Math.ceil(subLista.size() / 2);
+	            				logger.info("RESTAURA PUT ZMED ELEMENTO EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+	            				logger.info("PUT ZMED POSICION: "+ elementMediana);
+	            				logger.info("PUT ZMED ELEMENTO: "+ subLista.get(elementMediana)[0]+","+ subLista.get(elementMediana)[1]+ ","+ subLista.get(elementMediana)[2] );
+	            				
+	            				restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), subLista.get(elementMediana));
+	            			}
 	            		}else{
-	            			logger.info("PUT PixelRGBzxy");
-			            	System.out.println("PUT PixelRGBzxy");
-			            	
+	            				
+			            	logger.info("RESTAURA PixelRGBzxy EN LA POSICION xy: "+recorrerLista.getPosicionX()+","+recorrerLista.getPosicionY());
+		            		logger.info("RESTAURA PixelRGBzxy: "+zxy.getPixel()[0]+","+zxy.getPixel()[1]+","+zxy.getPixel()[2]);
+		                	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 			            	restoredColProcessor.putPixel(recorrerLista.getPosicionX(), recorrerLista.getPosicionY(), zxy.getPixel());
 	            		}
 	            			
