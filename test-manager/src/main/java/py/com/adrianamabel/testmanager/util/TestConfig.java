@@ -34,7 +34,7 @@ public class TestConfig {
     public double PROBABILIDAD_RUIDO_STEP = 0.01;
     public int PROBABILIDAD_RUIDO_CANT = (int)(PROBABILIDAD_RUDO_TO/PROBABILIDAD_RUIDO_STEP);
     
-    public int CANTIDAD_HILOS_TESTS = 10;
+    public int CANTIDAD_HILOS_TESTS = 1;
     
     public int[][] ORDERS_RGB = {
         {0, 1, 2},
